@@ -39,7 +39,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const propsContext = useButtonPropsContext();
     const buttonProps = useMemo(
       () => mergeProps<ButtonProps>(propsContext, props),
-      [propsContext, props]
+      [propsContext, props],
     );
 
     const {
@@ -71,7 +71,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
       </BaseButton>
     );
-  }
+  },
 );
 
 export interface ButtonGroupProps extends GroupProps, ButtonVariantProps {}
@@ -80,14 +80,14 @@ export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
   function ButtonGroup(props, ref) {
     const [variantProps, otherProps] = useMemo(
       () => button.splitVariantProps(props),
-      [props]
+      [props],
     );
     return (
       <ButtonPropsProvider value={variantProps}>
         <Group ref={ref} {...otherProps} />
       </ButtonPropsProvider>
     );
-  }
+  },
 );
 
 const [ButtonPropsProvider, useButtonPropsContext] =

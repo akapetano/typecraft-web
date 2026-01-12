@@ -6,6 +6,6 @@ export const recipes = {
   button,
   group,
   absoluteCenter,
-  spinner
-}
-export const slotRecipes = {}
+  spinner,
+};
+export const slotRecipes = {};
