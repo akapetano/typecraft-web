@@ -15,10 +15,6 @@ global.ResizeObserver = ResizeObserver;
 
 // IntersectionObserver mock - Essential for Ark UI
 class IntersectionObserverMock {
-  constructor(
-    _callback?: IntersectionObserverCallback,
-    _options?: IntersectionObserverInit,
-  ) {}
   disconnect() {}
   observe(_target: Element) {}
   unobserve(_target: Element) {}
@@ -82,7 +78,7 @@ if (!global.PointerEvent) {
 }
 
 // getComputedStyle mock
-global.getComputedStyle = (element: Element) => {
+global.getComputedStyle = (_element: Element) => {
   return {
     getPropertyValue: () => "",
   } as unknown as CSSStyleDeclaration;
@@ -91,7 +87,7 @@ global.getComputedStyle = (element: Element) => {
 // Optional: Filter console noise
 const originalError = console.error;
 beforeAll(() => {
-  console.error = (...args: any[]) => {
+  console.error = (...args: unknown[]) => {
     // Suppress known test environment warnings
     if (
       typeof args[0] === "string" &&
