@@ -1,51 +1,275 @@
-# Typecraft
+# Typecraft Web
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with
 [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## 📜 Table of Contents
 
-First, run the development server:
+- [Typecraft Web](#typecraft-web)
+  - [📜 Table of Contents](#-table-of-contents)
+  - [🛠️ Tech Stack](#️-tech-stack)
+  - [🚀 Getting Started](#-getting-started)
+  - [🎨 Styling](#-styling)
+  - [🧪 Testing](#-testing)
+  - [🎯 Code Quality \& Standards](#-code-quality--standards)
+    - [Available Commands](#available-commands)
+    - [Git Hooks (Husky)](#git-hooks-husky)
+    - [Commit Message Format](#commit-message-format)
+    - [Editor Setup (Recommended)](#editor-setup-recommended)
+  - [🤝 Contributing](#-contributing)
+  - [📚 Learn More](#-learn-more)
+
+## 🛠️ Tech Stack
+
+- **Framework:** [Next.js 16](https://nextjs.org) (App Router)
+- **Language:** [TypeScript 5](https://www.typescriptlang.org/)
+- **UI Library:** [Ark UI 5](https://ark-ui.com/) - Headless UI components
+- **Styling:** [Panda CSS 1.8](https://panda-css.com/) - CSS-in-JS with zero
+  runtime
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Testing:** [Vitest 4](https://vitest.dev/) +
+  [Testing Library](https://testing-library.com/)
+- **Code Quality:** [Biome 2.2](https://biomejs.dev/) - Fast linter & formatter
+- **Git Hooks:** [Husky 9](https://typicode.github.io/husky/) +
+  [lint-staged](https://github.com/lint-staged/lint-staged)
+- **Commit Standards:** [Commitlint](https://commitlint.js.org/) (Conventional
+  Commits)
+- **Package Manager:** [pnpm](https://pnpm.io/)
+
+## 🚀 Getting Started
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone <your-repo-url>
+   cd typecraft-web
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   pnpm install
+   ```
+
+   This will also:
+
+   - Set up Husky git hooks automatically
+   - Generate Panda CSS types
+
+3. **Run the development server:**
+
+   ```bash
+   pnpm dev
+   ```
+
+4. **Open your browser:**
+
+   Navigate to [http://localhost:3000](http://localhost:3000) to see the app.
+
+## 🎨 Styling
+
+This project uses **Panda CSS** for styling with **Ark UI** for accessible,
+headless components.
+
+- **Panda CSS:** Zero-runtime CSS-in-JS with type-safe styles
+- **Theme Configuration:** `panda.config.ts`
+- **Design Tokens:** Located in `src/theme/`
+- **Recipes:** Reusable component styles in `src/theme/recipes/`
+
+After changing Panda configuration, regenerate types:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm prepare:panda
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
-result.
+## 🧪 Testing
 
-You can start editing the page by modifying `app/page.tsx`. The page
-auto-updates as you edit the file.
+This project uses **Vitest** for fast, modern testing with a comprehensive setup
+for React components.
 
-This project uses
-[`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts)
-to automatically optimize and load [Geist](https://vercel.com/font), a new font
-family for Vercel.
+### Running Tests
 
-## Learn More
+```bash
+# Run tests in watch mode (development)
+pnpm test
 
-To learn more about Next.js, take a look at the following resources:
+# Run tests once (CI/pre-push)
+pnpm test:run
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Run with visual UI
+pnpm test:ui
 
-You can check out
-[the Next.js GitHub repository](https://github.com/vercel/next.js) - your
-feedback and contributions are welcome!
+# Generate coverage report
+pnpm test:coverage
+```
 
-## Deploy on Vercel
+### Testing Setup
 
-The easiest way to deploy your Next.js app is to use the
-[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-from the creators of Next.js.
+- **Framework:** Vitest with jsdom environment
+- **React Testing:** Testing Library (React, User Event, Jest DOM)
+- **Accessibility Testing:** vitest-axe for a11y checks
+- **Browser API Mocks:** ResizeObserver, IntersectionObserver, and more (see
+  `src/tests/vitest.setup.ts`)
 
-Check out our
-[Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying)
-for more details.
+### Writing Tests
+
+Tests are co-located with components:
+
+```
+src/components/core/Button/
+├── Button.tsx
+└── Button.test.ts ← Tests here
+```
+
+## 🎯 Code Quality & Standards
+
+This project enforces **strict code quality** using **Biome** and **automated
+git hooks**.
+
+### Available Commands
+
+| Command         | Description                         |
+| --------------- | ----------------------------------- |
+| `pnpm lint`     | Check for code issues               |
+| `pnpm format`   | Format code using Biome             |
+| `pnpm fix`      | Auto-fix all fixable linting issues |
+| `pnpm test`     | Run tests in watch mode             |
+| `pnpm test:run` | Run tests once                      |
+| `pnpm build`    | Build for production                |
+
+### Git Hooks (Husky)
+
+Git hooks run automatically to ensure code quality:
+
+#### 🔹 Pre-Commit Hook
+
+**Runs on:** `git commit`
+
+- Formats and lints **staged files only** using `lint-staged`
+- Runs type checking with TypeScript
+- ⚡ **Fast** (~5 seconds)
+
+#### 🔹 Commit Message Hook
+
+**Runs on:** `git commit`
+
+- Validates commit messages follow
+  [Conventional Commits](https://www.conventionalcommits.org/)
+- Enforces format: `type(scope): subject`
+- ⚡⚡⚡ **Instant**
+
+#### 🔹 Pre-Push Hook
+
+**Runs on:** `git push`
+
+- Type checks entire codebase
+- Lints all files
+- Runs full test suite
+- Builds the project
+- 🐢 **Slower** (~30s-2min) - catches issues before they reach remote
+
+**Skip hooks in emergencies:**
+
+```bash
+git commit --no-verify   # Skip pre-commit & commit-msg
+git push --no-verify     # Skip pre-push
+```
+
+### Commit Message Format
+
+This project follows
+[Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+<type>(<scope>): <subject>
+
+[optional body]
+
+[optional footer]
+```
+
+**Examples:**
+
+```bash
+git commit -m "feat: add dark mode toggle"
+git commit -m "fix: resolve button hover state"
+git commit -m "docs: update README with testing guide"
+git commit -m "refactor(auth): simplify token validation"
+git commit -m "test: add Button component tests"
+```
+
+**Allowed types:**
+
+- `feat` - New feature
+- `fix` - Bug fix
+- `docs` - Documentation changes
+- `style` - Code style changes (formatting, etc.)
+- `refactor` - Code refactoring
+- `perf` - Performance improvements
+- `test` - Adding or updating tests
+- `chore` - Maintenance tasks
+- `ci` - CI/CD changes
+- `build` - Build system changes
+
+### Editor Setup (Recommended)
+
+**VS Code (Cursor):**
+
+Install the Biome extension:
+
+- [Biome](https://marketplace.visualstudio.com/items?itemName=biomejs.biome)
+
+The project includes `.vscode/settings.json` with:
+
+- Auto-format on save
+- Biome as default formatter
+
+## 🤝 Contributing
+
+1. **Create a feature branch:**
+
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+2. **Make your changes and commit:**
+
+   ```bash
+   git add .
+   git commit -m "feat: add your feature"
+   ```
+
+   The pre-commit hook will automatically format and lint your staged files.
+
+3. **Push your branch:**
+
+   ```bash
+   git push -u origin feature/your-feature-name
+   ```
+
+   The pre-push hook will run full checks before pushing.
+
+4. **Open a pull request**
+
+## 📚 Learn More
+
+### Next.js Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Learn Next.js](https://nextjs.org/learn)
+- [Next.js GitHub](https://github.com/vercel/next.js)
+
+### UI & Styling
+
+- [Ark UI Documentation](https://ark-ui.com/)
+- [Panda CSS Documentation](https://panda-css.com/)
+
+### Testing
+
+- [Vitest Documentation](https://vitest.dev/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+
+### Code Quality
+
+- [Biome Documentation](https://biomejs.dev/)
+- [Conventional Commits](https://www.conventionalcommits.org/)
