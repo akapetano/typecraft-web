@@ -1,0 +1,125 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      time: "06:00"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "pnpm"
+    versioning-strategy: increase-if-necessary
+    allow:
+      - dependency-type: "direct"
+    rebase-strategy: "auto"
+
+    groups:
+      # Core Framework
+      react-next:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "next"
+        update-types:
+          - "minor"
+          - "patch"
+
+      typescript:
+        patterns:
+          - "typescript"
+        update-types:
+          - "minor"
+          - "patch"
+
+      # UI & Styling
+      ark-ui:
+        patterns:
+          - "@ark-ui/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+      panda-css:
+        patterns:
+          - "@pandacss/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+      lucide:
+        patterns:
+          - "lucide-react"
+        update-types:
+          - "minor"
+          - "patch"
+
+      # Testing
+      testing:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+          - "@testing-library/*"
+          - "jsdom"
+          - "vitest-axe"
+          - "resize-observer-polyfill"
+        update-types:
+          - "minor"
+          - "patch"
+
+      # Code Quality
+      biome:
+        patterns:
+          - "@biomejs/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+      commitlint:
+        patterns:
+          - "@commitlint/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+      husky:
+        patterns:
+          - "husky"
+          - "lint-staged"
+        update-types:
+          - "minor"
+          - "patch"
+
+      # Build Tools
+      vite:
+        patterns:
+          - "@vitejs/*"
+          - "vite-*"
+        update-types:
+          - "minor"
+          - "patch"
+
+      # Type Definitions
+      types:
+        patterns:
+          - "@types/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+    # Ignore major version updates (require manual review)
+    ignore:
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "next"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@ark-ui/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@pandacss/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "vitest"
+        update-types: ["version-update:semver-major"]
