@@ -9,6 +9,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with
   - [📜 Table of Contents](#-table-of-contents)
   - [🛠️ Tech Stack](#️-tech-stack)
   - [🚀 Getting Started](#-getting-started)
+  - [🌐 Automated Dependency Updates](#-automated-dependency-updates)
   - [🎨 Styling](#-styling)
   - [🧪 Testing](#-testing)
   - [🎯 Code Quality \& Standards](#-code-quality--standards)
@@ -65,6 +66,45 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with
 4. **Open your browser:**
 
    Navigate to [http://localhost:3000](http://localhost:3000) to see the app.
+
+## 🌐 Automated Dependency Updates
+
+This project uses **Dependabot** to keep dependencies up-to-date automatically.
+
+### How It Works
+
+- **Schedule:** Dependabot runs **weekly** (Mondays at 6:00 AM UTC)
+- **Updates:** Checks for updates to all `pnpm` dependencies
+- **Grouping:** Related dependencies are grouped to reduce PR noise
+- **Auto-merge:** Minor and patch updates merge automatically after CI passes
+- **Manual review:** Major version updates require manual approval
+
+### Dependency Groups
+
+Dependencies are organized into logical groups:
+
+| Group                | Packages                                                   | Auto-merge     |
+| -------------------- | ---------------------------------------------------------- | -------------- |
+| **React & Next.js**  | `react`, `react-dom`, `next`                               | ✅ Minor/Patch |
+| **Ark UI**           | `@ark-ui/*`                                                | ✅ Minor/Patch |
+| **Panda CSS**        | `@pandacss/*`                                              | ✅ Minor/Patch |
+| **Testing**          | `vitest`, `@vitest/*`, `@testing-library/*`, `jsdom`, etc. | ✅ Minor/Patch |
+| **Biome**            | `@biomejs/*`                                               | ✅ Minor/Patch |
+| **Commitlint**       | `@commitlint/*`                                            | ✅ Minor/Patch |
+| **Husky**            | `husky`, `lint-staged`                                     | ✅ Minor/Patch |
+| **Type Definitions** | `@types/*`                                                 | ✅ Minor/Patch |
+
+### Manual Trigger
+
+To manually trigger Dependabot:
+
+1. Go to **GitHub → Repository → Insights → Dependency Graph → Dependabot**
+2. Click **"Check for updates"**
+
+### Configuration
+
+- **Dependabot config:** `.github/dependabot.yml`
+- **Auto-merge workflow:** `.github/workflows/dependabot-auto-merge.yml`
 
 ## 🎨 Styling
 
