@@ -10,6 +10,6 @@
     "lib": "@/lib",
     "recipes": "@/theme/recipes",
     "theme": "@/theme",
-    "ui": "@/components/core"
+    "ui": "@/components/ui"
   }
 }

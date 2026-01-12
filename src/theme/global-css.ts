@@ -1,17 +1,20 @@
+import { COLOR_PALETTE } from "@/constants/colorPalette";
+
 export const globalCss = {
   extend: {
-    '*': {
-      '--global-color-border': 'colors.border',
-      '--global-color-placeholder': 'colors.fg.subtle',
-      '--global-color-selection': 'colors.colorPalette.subtle.bg',
-      '--global-color-focus-ring': 'colors.colorPalette.solid.bg',
+    "*": {
+      "--global-color-border": "colors.border",
+      "--global-color-placeholder": "colors.fg.subtle",
+      "--global-color-selection": "colors.colorPalette.subtle.bg",
+      "--global-color-focus-ring": "colors.colorPalette.solid.bg",
     },
     html: {
-      colorPalette: 'gray',
+      colorPalette: "gray",
     },
     body: {
-      background: 'canvas',
-      color: 'fg.default',
+      background: "canvas",
+      color: "fg.default",
+      colorPalette: COLOR_PALETTE,
     },
   },
-}
+};

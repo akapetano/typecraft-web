@@ -1,6 +1,6 @@
+import { sage } from "@/theme/colors/sage";
 import { green } from "@/theme/colors/green";
 import { red } from "@/theme/colors/red";
-import { sand } from "@/theme/colors/sand";
 import { mint } from "@/theme/colors/mint";
 import { animationStyles } from "@/theme/animation-styles";
 import { zIndex } from "@/theme/tokens/z-index";
@@ -89,7 +89,7 @@ export default defineConfig({
           },
 
           mint: mint,
-          gray: sand,
+          gray: sage,
           red: red,
           green: green,
         },

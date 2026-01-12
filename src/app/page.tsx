@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div className="page">
       <h1>Hello World</h1>
-      <Button colorPalette="mint">Click me</Button>
+      <Button>Click me</Button>
     </div>
   );
 }
