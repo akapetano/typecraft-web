@@ -1,11 +1,12 @@
 "use client";
+
 import { ark } from "@ark-ui/react/factory";
 import { createContext, mergeProps } from "@ark-ui/react/utils";
 import { type ComponentProps, forwardRef, useMemo } from "react";
 import { styled } from "styled-system/jsx";
 import { type ButtonVariantProps, button } from "styled-system/recipes";
-import { Group, type GroupProps } from "./components/group";
-import { Loader } from "./components/loader";
+import { Group, type GroupProps } from "@/components/core/Group/Group";
+import { Loader } from "@/components/core/Loader/Loader";
 
 interface ButtonLoadingProps {
   /**

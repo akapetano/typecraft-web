@@ -13,6 +13,7 @@ import { keyframes } from "@/theme/keyframes";
 import { globalCss } from "@/theme/global-css";
 import { conditions } from "@/theme/conditions";
 import { slotRecipes, recipes } from "@/theme/recipes";
+import { fonts } from "@/theme/fonts";
 import { defineConfig } from "@pandacss/dev";
 
 export default defineConfig({
@@ -42,9 +43,10 @@ export default defineConfig({
       textStyles: textStyles,
 
       tokens: {
-        colors: colors,
-        durations: durations,
-        zIndex: zIndex,
+        colors,
+        durations,
+        zIndex,
+        fonts,
       },
 
       semanticTokens: {
