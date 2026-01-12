@@ -1,6 +1,6 @@
+import { Box } from "styled-system/jsx";
 import { Button } from "@/components/core/Button/Button";
 import { Layout } from "@/components/shared/Layout/Layout";
-import { Box } from "styled-system/jsx";
 
 export default function Home() {
   return (

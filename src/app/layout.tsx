@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { spaceGrotesk, geistMono } from "@/theme/nextFonts";
+import { geistMono, spaceGrotesk } from "@/theme/nextFonts";
 
 export const metadata: Metadata = {
   title: "Typecraft",

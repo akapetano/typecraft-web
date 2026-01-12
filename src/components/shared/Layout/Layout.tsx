@@ -1,4 +1,4 @@
-import { Container, ContainerProps } from "styled-system/jsx";
+import { Container, type ContainerProps } from "styled-system/jsx";
 
 export const Layout = (props: ContainerProps) => {
   return (
