@@ -2,6 +2,11 @@
   "name": "typecraft-web",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@10.28.0",
   "scripts": {
     "prepare": "husky && panda codegen",
     "prepare:husky": "husky",
