@@ -1,0 +1,5 @@
+# Run lint-staged
+pnpm exec lint-staged
+
+# Optional: Run type checking
+pnpm exec tsc --noEmit
