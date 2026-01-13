@@ -1,11 +1,20 @@
-import { Box, Container } from "styled-system/jsx";
+import { Box, Container, HStack } from "styled-system/jsx";
 import { Logo } from "@/components/core/Logo/Logo";
+import { ColorModeButton } from "@/components/shared/ColorModeButton/ColorModeButton";
+import type { ColorMode } from "@/types/theme/colorMode";
 
-export const Header = () => {
+interface HeaderProps {
+  colorMode?: ColorMode;
+}
+
+export const Header = ({ colorMode }: HeaderProps) => {
   return (
-    <Box as="header" w="full" bg="bg.subtle" shadow="md" py="2">
+    <Box as="header" w="full" shadow="md" py="2">
       <Container maxWidth="breakpoint-xl">
-        <Logo />
+        <HStack justifyContent="space-between" alignItems="center">
+          <Logo />
+          <ColorModeButton colorMode={colorMode} />
+        </HStack>
       </Container>
     </Box>
   );
