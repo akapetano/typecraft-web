@@ -52,6 +52,14 @@ export default defineConfig({
 
       semanticTokens: {
         colors: {
+          bg: {
+            default: {
+              value: {
+                _light: "{colors.white}",
+                _dark: "{colors.gray.1}",
+              },
+            },
+          },
           fg: {
             default: {
               value: {
