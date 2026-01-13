@@ -103,3 +103,16 @@ beforeAll(() => {
 afterAll(() => {
   console.error = originalError;
 });
+
+// vitest.setup.ts (add this section)
+
+vi.mock("@/theme/nextFonts", () => ({
+  spaceGrotesk: {
+    variable: "--font-family-body",
+    className: "space-grotesk-mock",
+  },
+  geistMono: {
+    variable: "--font-family-mono",
+    className: "geist-mono-mock",
+  },
+}));
