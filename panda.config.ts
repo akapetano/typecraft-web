@@ -97,6 +97,7 @@ export default defineConfig({
           },
 
           brand: mint,
+          mint: mint,
           gray: sage,
           red: red,
           green: green,
