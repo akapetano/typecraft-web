@@ -25,15 +25,15 @@ describe("RootShell", () => {
     expect(html).toHaveAttribute("lang", "es");
   });
 
-  it("applies font variable classes to body", () => {
+  it("applies font variable classes to html", () => {
     const { container } = render(
       <RootShell>
         <div>Content</div>
       </RootShell>,
     );
 
-    const body = container.closest("body");
-    const className = body?.className || "";
+    const html = container.closest("html");
+    const className = html?.className || "";
 
     // Verify both font variables are present
     expect(className).toContain("--font-family-body");
