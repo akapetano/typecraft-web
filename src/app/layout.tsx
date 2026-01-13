@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { geistMono, spaceGrotesk } from "@/theme/nextFonts";
+import { AppLayout } from "@/components/shared/AppLayout/AppLayout";
+import { RootShell } from "@/components/shared/RootShell/RootShell";
 
 export const metadata: Metadata = {
   title: "Typecraft",
@@ -13,10 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${spaceGrotesk.variable} ${geistMono.variable}`}>
-        {children}
-      </body>
-    </html>
+    <RootShell>
+      <AppLayout>{children}</AppLayout>
+    </RootShell>
   );
 }

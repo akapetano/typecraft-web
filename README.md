@@ -12,6 +12,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with
   - [🌐 Automated Dependency Updates](#-automated-dependency-updates)
   - [🎨 Styling](#-styling)
   - [🧪 Testing](#-testing)
+  - [🔄 CI/CD Pipeline](#-cicd-pipeline)
   - [🎯 Code Quality \& Standards](#-code-quality--standards)
     - [Available Commands](#available-commands)
     - [Git Hooks (Husky)](#git-hooks-husky)
@@ -160,6 +161,66 @@ src/components/core/Button/
 ├── Button.tsx
 └── Button.test.ts ← Tests here
 ```
+
+## 🔄 CI/CD Pipeline
+
+This project uses **GitHub Actions** for continuous integration and deployment
+checks.
+
+### Pipeline Overview
+
+The CI pipeline runs automatically on:
+
+- Every push to `develop` or `main` branches
+- Every pull request targeting `develop` or `main`
+
+### Jobs
+
+The pipeline consists of 4 parallel jobs that ensure code quality:
+
+| Job            | What It Does                       | Duration |
+| -------------- | ---------------------------------- | -------- |
+| **Lint**       | Checks code style with Biome       | ~10s     |
+| **Type Check** | Validates TypeScript types         | ~30s     |
+| **Test**       | Runs full test suite with Vitest   | ~40s     |
+| **Build**      | Verifies production build succeeds | ~45s     |
+
+**Execution Strategy:**
+
+- `Lint`, `Type Check`, and `Test` run in **parallel** for speed
+- `Build` runs only after all three pass
+- Total CI time: ~85 seconds (instead of 125s if sequential)
+
+### CI Configuration
+
+- **Workflow:** `.github/workflows/ci.yml`
+- **Setup Action:** `.github/actions/setup-environment/action.yml`
+- **Node.js:** 22.x
+- **pnpm:** 10.x
+- **Lockfile:** Frozen (ensures consistent dependencies)
+
+### Requirements
+
+**Before merging a PR:**
+
+- ✅ All CI checks must pass
+- ✅ Code must be reviewed and approved
+- ✅ Branch must be up-to-date with target branch
+
+**Branch protection rules enforce:**
+
+- Required status checks: Lint, Type Check, Test, Build
+- No bypassing for administrators (recommended)
+
+### Local vs CI
+
+Your **pre-push hook** runs the same checks as CI, so you'll catch issues
+locally before pushing:
+
+# These run both locally (pre-push) and in CI:
+
+pnpm exec tsc --noEmit # Type check pnpm lint # Lint pnpm test:run # Tests pnpm
+build # Build
 
 ## 🎯 Code Quality & Standards
 
