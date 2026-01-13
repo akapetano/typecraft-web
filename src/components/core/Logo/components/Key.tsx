@@ -1,5 +1,6 @@
 import { Fragment, type HTMLAttributes } from "react";
-import { cx } from "styled-system/css";
+import { css, cx } from "styled-system/css";
+import { styled } from "styled-system/jsx";
 
 export type KeyRootProps = HTMLAttributes<SVGElement> & {
   width?: number;
@@ -43,8 +44,19 @@ export const Gradients = () => {
         y2="76"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="var(--colors-violet-8)" />
-        <stop offset="1" stopColor="var(--colors-violet-12)" />
+        <styled.stop
+          stopColor={{
+            base: "var(--colors-violet-8)",
+            _dark: "var(--colors-violet-3)",
+          }}
+        />
+        <styled.stop
+          offset="1"
+          stopColor={{
+            base: "var(--colors-violet-12)",
+            _dark: "var(--colors-violet-7)",
+          }}
+        />
       </linearGradient>
 
       <linearGradient
@@ -55,8 +67,19 @@ export const Gradients = () => {
         y2="70"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="var(--colors-brand-7)" />
-        <stop offset="1" stopColor="var(--colors-brand-4)" />
+        <styled.stop
+          stopColor={{
+            base: "var(--colors-brand-7)",
+            _dark: "var(--colors-brand-12)",
+          }}
+        />
+        <styled.stop
+          offset="1"
+          stopColor={{
+            base: "var(--colors-brand-4)",
+            _dark: "var(--colors-brand-9)",
+          }}
+        />
       </linearGradient>
     </defs>
   );
@@ -124,18 +147,25 @@ export const KeyHighlight = () => {
 };
 
 export const CodeGlyph = () => {
+  const pathClass = css({
+    stroke: {
+      base: "var(--colors-violet-12)",
+      _dark: "var(--colors-violet-7)",
+    },
+  });
+
   return (
     <Fragment>
       <path
         d="M41 34L34 40L41 46"
-        stroke="var(--colors-violet-12)"
+        className={pathClass}
         strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M47 34L54 40L47 46"
-        stroke="var(--colors-violet-12)"
+        className={pathClass}
         strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
