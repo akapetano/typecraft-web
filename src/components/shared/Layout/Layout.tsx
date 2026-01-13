@@ -6,8 +6,7 @@ export const Layout = (props: ContainerProps) => {
       maxWidth="breakpoint-xl"
       display="flex"
       flexDirection="column"
-      alignItems="center"
-      minH="100vh"
+      flex="1"
       {...props}
     />
   );
