@@ -4,6 +4,7 @@ import { green } from "@/theme/colors/green";
 import { mint } from "@/theme/colors/mint";
 import { red } from "@/theme/colors/red";
 import { sage } from "@/theme/colors/sage";
+import { violet } from "@/theme/colors/violet";
 import { conditions } from "@/theme/conditions";
 import { fonts } from "@/theme/fonts";
 import { globalCss } from "@/theme/global-css";
@@ -88,10 +89,18 @@ export default defineConfig({
             },
           },
 
-          mint: mint,
+          success: {
+            value: {
+              _light: "{colors.green.9}",
+              _dark: "{colors.green.9}",
+            },
+          },
+
+          brand: mint,
           gray: sage,
           red: red,
           green: green,
+          violet: violet,
         },
 
         shadows: shadows,
