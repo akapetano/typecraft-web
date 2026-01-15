@@ -90,21 +90,9 @@ export default defineConfig({
             },
           },
 
-          error: {
-            value: {
-              _light: "{colors.red.9}",
-              _dark: "{colors.red.9}",
-            },
-          },
-
-          success: {
-            value: {
-              _light: "{colors.green.9}",
-              _dark: "{colors.green.9}",
-            },
-          },
-
           brand: mint,
+          success: green,
+          error: red,
           mint: mint,
           gray: sage,
           red: red,
