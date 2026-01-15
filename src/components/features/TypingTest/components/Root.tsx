@@ -14,7 +14,7 @@ export function Root({ children, ...props }: RootProps) {
       p="4"
       {...props}
     >
-      <Box w="full" maxW="3xl" spaceY="8">
+      <Box w="full" maxW="4xl" spaceY="8">
         {children}
       </Box>
     </Flex>
