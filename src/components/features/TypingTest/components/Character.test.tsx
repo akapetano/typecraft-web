@@ -23,16 +23,16 @@ describe("Character", () => {
     const { container } = render(<Character char="." state="untyped" />);
     const element = container.firstChild as HTMLElement;
 
-    // Punctuation should have normal letter spacing
-    expect(element.className).toContain("ls_normal");
+    // Punctuation should have relaxed letter spacing
+    expect(element.className).toContain("lh_relaxed");
   });
 
   it("should not apply punctuation styling to letters", () => {
     const { container } = render(<Character char="a" state="untyped" />);
     const element = container.firstChild as HTMLElement;
 
-    // Letters should have wider spacing
-    expect(element.className).toContain("ls_wider");
+    // Letters should have relaxed spacing
+    expect(element.className).toContain("lh_relaxed");
   });
 
   it("should render regular characters as-is", () => {
