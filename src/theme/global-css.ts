@@ -15,6 +15,7 @@ export const globalCss = {
       background: "bg.default",
       color: "fg.default",
       colorPalette: COLOR_PALETTE,
+      fontFamily: "body",
     },
   },
 };
