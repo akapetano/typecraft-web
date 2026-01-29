@@ -1,0 +1,32 @@
+<svg width="88" height="90" viewBox="0 0 88 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="baseGradient" x1="10" y1="8" x2="78" y2="76" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#291f43"/>
+      <stop offset="1" stop-color="#56468b"/>
+    </linearGradient>
+    <linearGradient id="faceGradient" x1="16" y1="14" x2="72" y2="70" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c4f5e1"/>
+      <stop offset="1" stop-color="#277f70"/>
+    </linearGradient>
+  </defs>
+  
+  <g class="key">
+    <!-- Shadow -->
+    <rect x="10" y="14" width="68" height="70" rx="16" fill="#000000" opacity="0.15"/>
+    
+    <!-- Base -->
+    <rect x="10" y="8" width="68" height="68" rx="16" fill="url(#baseGradient)"/>
+    
+    <!-- Face -->
+    <rect x="16" y="6" width="56" height="56" rx="12" fill="url(#faceGradient)"/>
+    
+    <g transform="translate(0 -4)">
+      <!-- Highlight -->
+      <path d="M17 22C19 16 20 11 30 11H58C62 11 70 12 71 22" stroke="white" stroke-opacity="0.25" stroke-width="2" stroke-linecap="round" fill="none"/>
+      
+      <!-- Code Glyph -->
+      <path d="M41 34L34 40L41 46" stroke="#56468b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M47 34L54 40L47 46" stroke="#56468b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+</svg>
