@@ -2,11 +2,13 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { AppLayout } from "@/components/shared/AppLayout/AppLayout";
 import { RootShell } from "@/components/shared/RootShell/RootShell";
+import { APP_DESCRIPTION, APP_NAME, ICONS } from "@/constants/metadata";
 import { getSavedColorMode } from "@/utils/colorMode.server";
 
 export const metadata: Metadata = {
-  title: "Typecraft",
-  description: "Typecraft is a platform for typing practice",
+  title: APP_NAME,
+  description: APP_DESCRIPTION,
+  icons: ICONS,
 };
 
 export default async function RootLayout({
