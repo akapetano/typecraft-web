@@ -8,8 +8,10 @@ import { violet } from "@/theme/colors/violet";
 import { conditions } from "@/theme/conditions";
 import { fonts } from "@/theme/fonts";
 import { globalCss } from "@/theme/global-css";
+import { gradients } from "@/theme/gradients";
 import { keyframes } from "@/theme/keyframes";
 import { layerStyles } from "@/theme/layer-styles";
+import { radii } from "@/theme/radii";
 import { recipes, slotRecipes } from "@/theme/recipes";
 import { textStyles } from "@/theme/text-styles";
 import { colors } from "@/theme/tokens/colors";
@@ -100,21 +102,11 @@ export default defineConfig({
           violet: violet,
         },
 
+        gradients: gradients,
+
         shadows: shadows,
 
-        radii: {
-          l1: {
-            value: "{radii.xs}",
-          },
-
-          l2: {
-            value: "{radii.sm}",
-          },
-
-          l3: {
-            value: "{radii.md}",
-          },
-        },
+        radii: radii,
       },
     },
   },
@@ -123,6 +115,7 @@ export default defineConfig({
   outdir: "styled-system",
   globalCss: globalCss,
   conditions: conditions,
+
   plugins: [
     {
       name: "Remove Panda Preset Colors",

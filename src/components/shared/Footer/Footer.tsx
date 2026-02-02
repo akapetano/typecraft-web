@@ -7,7 +7,7 @@ export const Footer = () => {
       as="footer"
       w="full"
       bg="bg.subtle"
-      borderTop="1px solid"
+      borderTopWidth="thin"
       borderColor="border"
       py="6"
       mt="auto"
