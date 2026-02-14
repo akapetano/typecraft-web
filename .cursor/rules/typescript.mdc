@@ -1,0 +1,40 @@
+---
+description: TypeScript and code style
+globs: "**/*.ts,**/*.tsx"
+alwaysApply: false
+---
+
+# TypeScript & Code Style
+
+## Config
+
+- **Strict** mode is on (`tsconfig.json`). No `any`; use proper types or
+  `unknown` where needed.
+- **Path alias**: `@/*` → `./src/*`; use `@/` for all imports under `src/`.
+
+## Types
+
+- Put feature/domain types in **`*.types.ts`** next to the feature (e.g.
+  `TypingTest.types.ts` with `Difficulty`, `CharacterState`).
+- Export **component props** from the component file (e.g.
+  `export interface ButtonProps`,
+  `export type HeadingProps = ComponentProps<typeof Heading>`).
+- Use **React types** from `react` (e.g. `ComponentProps`, `React.ReactNode`).
+
+## Style (Biome)
+
+- **2 spaces**, **space** indent. No trailing commas required; follow existing
+  style.
+- **Organize imports**: Biome handles import order
+  (assist.actions.source.organizeImports).
+- **No unused imports**: Biome rule `noUnusedImports: "error"`.
+- Run **`pnpm fix`** (or `pnpm format` + `pnpm lint`) before committing;
+  lint-staged runs Biome on staged files.
+
+## Naming
+
+- **Interfaces/types**: PascalCase. Prefer `interface` for object shapes that
+  may be extended.
+- **Files**: PascalCase for components (`Button.tsx`); camelCase for
+  utils/hooks/types/data (`useColorMode.ts`, `TypingTest.types.ts`,
+  `TypingTest.data.ts`).
