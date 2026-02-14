@@ -1,0 +1,13 @@
+---
+description: Theme layer – recipes, tokens, conditions (Panda)
+globs: src/theme/**
+alwaysApply: false
+---
+
+# Theme (Panda)
+
+- **Recipes**: Define in `src/theme/recipes/*.ts` with `defineRecipe` or `defineSlotRecipe`. Export from `src/theme/recipes/index.ts` and list in `panda.config.ts` under `theme.extend.recipes` / `slotRecipes`. Set **jsx** to the component names that use the recipe.
+- **Tokens**: Add to `src/theme/tokens/*` or semantic tokens in `panda.config.ts` (e.g. `semanticTokens.colors`). Use existing semantic tokens (`fg`, `bg`, `brand`, `success`, `error`, etc.) in recipes when possible.
+- **Conditions**: Extend in `src/theme/conditions.ts` (e.g. `_light`, `_dark`, `_hover`). Reference in theme with `_condition` or in recipes.
+- **Colors**: Palette modules live in `src/theme/colors/*`; wire them in `panda.config.ts` semanticTokens.
+- After changing recipes, tokens, or conditions, run **`panda codegen`** (or `pnpm prepare`) so `styled-system` is updated.
