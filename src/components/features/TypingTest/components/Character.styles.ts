@@ -9,6 +9,10 @@ export const characterStyles = cva({
   },
   variants: {
     state: {
+      pending: {
+        color: "fg.muted",
+        opacity: 0.6,
+      },
       current: {
         color: "fg",
         bg: "brand.a2",
@@ -18,7 +22,7 @@ export const characterStyles = cva({
         textDecorationColor: "brand.9",
         borderRadius: "sm",
       },
-      correct: {
+      "correct-first-try": {
         color: "success.10",
         bg: "success.a3",
       },
@@ -26,9 +30,9 @@ export const characterStyles = cva({
         color: "error.10",
         bg: "error.a3",
       },
-      untyped: {
-        color: "fg.muted",
-        opacity: 0.6,
+      "incorrect-remedied": {
+        color: "incorrect-remedied.10",
+        bg: "incorrect-remedied.a3",
       },
     },
     punctuation: {
