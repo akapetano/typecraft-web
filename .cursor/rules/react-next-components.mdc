@@ -1,0 +1,45 @@
+---
+description: React, Next.js App Router, and component architecture
+globs: src/**/*.tsx
+alwaysApply: false
+---
+
+# React, Next.js & Component Architecture
+
+## Next.js App Router
+
+- Prefer **server components** by default. Add `"use client"` only when the module uses hooks, browser APIs, or client-only libraries.
+- Use **async** server components and server-only helpers (e.g. `src/utils/colorMode.server.ts`) for data/cookies; keep client code in `"use client"` modules.
+- App entry: `src/app/layout.tsx` (metadata, RootShell, AppLayout), `src/app/page.tsx` for the home page.
+
+## Component layout
+
+- **core/** – reusable primitives (Button, Input, Card, Heading, Text, Icon, Group, etc.). Used across the app.
+- **shared/** – app-wide layout and UI (Header, Footer, Layout, AppLayout, ColorModeButton, RootShell).
+- **features/** – feature-specific UI and logic (e.g. TypingTest and its subcomponents).
+
+## Feature modules
+
+For a feature (e.g. `TypingTest`), use co-located files:
+
+- `FeatureName.tsx` – main component
+- `FeatureName.types.ts` – types for the feature
+- `FeatureName.hooks.ts` – custom hooks
+- `FeatureName.utils.ts` – pure helpers
+- `FeatureName.data.ts` – static data (e.g. sample texts)
+- `FeatureName.constants.ts` – constants
+- `components/` – subcomponents used only by this feature
+
+## Core components (Ark UI + Panda)
+
+- Use **Ark UI** for behavior and accessibility: `ark.button`, `ark.div`, `Field` from `@ark-ui/react`, etc.
+- Compose with **Panda** via `styled(ark.*, recipe)` or `createStyleContext(slotRecipe)` for compound components.
+- Use **forwardRef** when the component must forward a ref (e.g. Button, form controls).
+- Export **props types** (e.g. `ButtonProps`, `HeadingProps`) for consumers.
+- Use **createContext** from `@ark-ui/react/utils` for variant/option context (e.g. ButtonGroup → ButtonPropsProvider).
+
+## Naming
+
+- Components and files: **PascalCase** (e.g. `TypingTest.tsx`, `Character.tsx`).
+- Hooks: **camelCase** with `use` prefix (e.g. `useTypingTest`, `useColorMode`).
+- Utils, constants, types: **camelCase** for functions/vars; types in `*.types.ts` or inline as needed.

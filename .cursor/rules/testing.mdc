@@ -1,0 +1,35 @@
+---
+description: Vitest and Testing Library conventions
+globs: src/**/*.test.{ts,tsx}, src/__tests__/**/*
+alwaysApply: false
+---
+
+# Testing (Vitest & Testing Library)
+
+## Setup
+
+- Config and globals: `src/tests/vitest.setup.ts` (RTL cleanup, ResizeObserver, IntersectionObserver, Ark UI mocks, matchMedia, PointerEvent, nextFonts mock).
+- Do not duplicate these mocks; extend the setup if new global deps are needed.
+
+## File placement and naming
+
+- **Unit tests**: next to the module as `ComponentName.test.tsx` or `moduleName.test.ts`.
+- **Integration tests**: under `src/__tests__/integration/` (e.g. `colorMode.integration.test.tsx`).
+
+## Structure
+
+- Use **describe** for the subject (e.g. `describe("Character", () => { ... })`).
+- Use **it** for each behavior; descriptions should be clear and outcome-based.
+- Prefer **Testing Library** (`render`, `screen`, user events) over direct DOM or implementation details; assert on accessible output and behavior where possible.
+- For Panda-generated class names, assert on stable class substrings only when testing styling (e.g. `expect(element.className).toContain("c_success")`).
+
+## Running tests
+
+- `pnpm test` – watch mode
+- `pnpm test:run` – single run
+- `pnpm test:coverage` – with coverage
+- `pnpm test:integration` – integration tests only
+
+## Accessibility
+
+- Use **vitest-axe** (extended in setup) for a11y assertions when testing components that render interactive or landmark content.

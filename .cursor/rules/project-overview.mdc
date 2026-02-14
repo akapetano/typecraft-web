@@ -1,0 +1,41 @@
+---
+description: Typecraft Web – stack, structure, and tooling
+alwaysApply: true
+---
+
+# Typecraft Web – Project Overview
+
+## Stack
+
+- **Framework**: Next.js 16 (App Router), React 19
+- **Styling**: Panda CSS (styled-system); no Tailwind/CSS-in-JS
+- **UI primitives**: Ark UI (`@ark-ui/react`)
+- **Lint/format**: Biome (no ESLint/Prettier)
+- **Tests**: Vitest, Testing Library, vitest-axe
+- **Path alias**: `@/*` → `./src/*` (use for all src imports)
+
+## Commands
+
+- `pnpm dev` – dev server
+- `pnpm build` – production build
+- `pnpm lint` – Biome check
+- `pnpm format` – Biome format
+- `pnpm fix` – Biome check --write
+- `pnpm test` / `pnpm test:run` / `pnpm test:coverage` – Vitest
+- `pnpm prepare` – husky + `panda codegen` (run after clone / dependency changes)
+
+## Folder structure
+
+- `src/app/` – Next.js App Router (layout, page, routes)
+- `src/components/` – core → shared → features
+- `src/theme/` – Panda config (recipes, tokens, conditions, keyframes, colors)
+- `src/hooks/`, `src/utils/`, `src/constants/`, `src/types/` – shared logic and types
+- `src/__tests__/integration/` – integration tests
+- `src/tests/vitest.setup.ts` – Vitest globals and mocks (e.g. Ark UI)
+
+## Conventions
+
+- Use **Biome** for formatting and linting; do not introduce ESLint/Prettier.
+- Use **Panda** for all styling; do not add Tailwind or arbitrary CSS-in-JS.
+- Use the **`@/`** path alias for imports under `src/`.
+- New recipes/tokens must be registered in `panda.config.ts` and, for recipes, in `src/theme/recipes/index.ts`.

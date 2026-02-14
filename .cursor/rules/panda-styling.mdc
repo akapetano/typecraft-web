@@ -1,0 +1,45 @@
+---
+description: Panda CSS styling and theme usage
+globs: src/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Panda CSS Styling
+
+## Imports
+
+- **Recipes** (from theme): `import { button } from "styled-system/recipes"` (and variant types, e.g. `ButtonVariantProps`).
+- **Styled primitives**: `import { styled, Box, Flex, Grid } from "styled-system/jsx"`.
+- **Component-local styles (cva)**: `import { cva } from "styled-system/css"`; use in `*.styles.ts` next to the component.
+- **Types**: `import type { StyledComponent, HTMLStyledProps } from "styled-system/..."` when needed (e.g. polymorphic `Heading`).
+
+## Where styles live
+
+- **Global theme recipes** (Button, Input, Heading, Text, Card, Group, etc.): define in `src/theme/recipes/*.ts` with `defineRecipe`, export from `src/theme/recipes/index.ts`, and list in `panda.config.ts` theme.extend. Register **jsx** component names in the recipe (e.g. `jsx: ["Button", "IconButton", "ButtonGroup"]`).
+- **Slot recipes** (compound components like Card): use `defineSlotRecipe`; compose in the component with `createStyleContext(slotRecipe)` and `withProvider` / `withContext`.
+- **Feature- or component-specific variants**: use **cva** in a co-located `ComponentName.styles.ts` and call it from the component (e.g. `characterStyles({ state, punctuation })`).
+
+## Semantic tokens
+
+- Use semantic tokens for theming: `fg`, `fg.muted`, `bg`, `border`, `brand`, `success`, `error`, etc. (see `panda.config.ts` semanticTokens).
+- Color mode: `_light` / `_dark` in theme; app uses `data-color-mode` (see `src/theme/conditions.ts`).
+
+## Patterns
+
+```ts
+// Core component with recipe
+const BaseButton = styled(ark.button, button);
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(...);
+
+// Simple styled primitive (no recipe)
+export const Span = styled("span");
+
+// Polymorphic with recipe
+export const Heading = styled("h2", heading) as StyledComponent<"h2", Props>;
+
+// Component-local cva (in Character.styles.ts)
+export const characterStyles = cva({ base: {...}, variants: { state: {...} } });
+```
+
+- Do **not** add new global styles outside Panda (no ad-hoc global CSS except what’s in `src/theme/global-css.ts` and `src/app/globals.css`).
+- Run **`panda codegen`** (or `pnpm prepare`) after adding/changing recipes or tokens so `styled-system` is up to date.
