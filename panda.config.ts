@@ -1,7 +1,9 @@
 import { defineConfig } from "@pandacss/dev";
 import { animationStyles } from "@/theme/animation-styles";
+import { amber } from "@/theme/colors/amber";
 import { green } from "@/theme/colors/green";
 import { mint } from "@/theme/colors/mint";
+import { orange } from "@/theme/colors/orange";
 import { red } from "@/theme/colors/red";
 import { sage } from "@/theme/colors/sage";
 import { violet } from "@/theme/colors/violet";
@@ -92,10 +94,14 @@ export default defineConfig({
 
           brand: mint,
           success: green,
+          warning: orange,
+          "incorrect-remedied": amber,
           error: red,
           mint: mint,
           gray: sage,
           red: red,
+          orange: orange,
+          amber: amber,
           green: green,
           violet: violet,
         },
