@@ -1,0 +1,20 @@
+---
+description: Conventional commit messages (commitlint)
+alwaysApply: true
+---
+
+# Git commits
+
+This project uses **commitlint** with `config-conventional`. When suggesting commits or writing commit messages:
+
+- Use **conventional format**: `type(scope): description`.
+- **Types**: `feat`, `fix`, `chore`, `docs`, `style`, `refactor`, `test`, `ci`, `perf`.
+- **Scope** (optional but helpful): e.g. `typing-test`, `theme`, `deps`, `cursor-rules`.
+- **Description**: lowercase after the colon; imperative mood (e.g. "add difficulty selector" not "added").
+- **Examples**:
+  - `feat(typing-test): add difficulty selector`
+  - `fix(theme): correct brand token in dark mode`
+  - `chore(deps): bump next to 16.1.6`
+  - `docs: add AGENTS.md`
+
+Breaking changes: use `feat!: ...` or add a `BREAKING CHANGE:` footer when relevant.

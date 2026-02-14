@@ -1,0 +1,13 @@
+---
+description: Accessibility (Ark UI, semantic HTML, a11y testing)
+globs: src/**/*.tsx
+alwaysApply: false
+---
+
+# Accessibility
+
+- **Ark UI** handles behavior and ARIA for its components; use Ark primitives (e.g. `Field`, `ark.button`) instead of raw elements when they fit. Do not override Ark’s ARIA unless you have a specific a11y requirement.
+- **Semantic HTML**: Prefer the right element (e.g. `nav`, `main`, `button`, `label`) over generic `div`/`span` with role/aria.
+- **Custom components**: When building something Ark doesn’t cover, add the right `role`, `aria-*`, and keyboard behavior (focus, Enter/Space for buttons, Escape to close, etc.).
+- **Focus**: Avoid removing focus from focusable elements with CSS only (e.g. `outline: none` without a visible focus style). Use Panda’s `focusVisibleRing` or equivalent.
+- **Testing**: For non-trivial UI, add **vitest-axe** assertions (setup already extends expect). Test keyboard flow and focus where it matters.

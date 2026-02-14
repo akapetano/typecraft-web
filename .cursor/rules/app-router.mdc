@@ -1,0 +1,12 @@
+---
+description: Next.js App Router – routes, layout, metadata, server/client
+globs: src/app/**
+alwaysApply: false
+---
+
+# App Router
+
+- **Routes**: File-based under `src/app/`. Use `layout.tsx` for shared shell, `page.tsx` for the route UI. Add `loading.tsx` or `error.tsx` when you need loading/error states for a segment.
+- **Layout**: Root layout (`src/app/layout.tsx`) should set metadata, load server-only data (e.g. saved color mode), and render the app shell (RootShell, AppLayout). Keep it a server component when possible.
+- **Metadata**: Export `metadata` (or `generateMetadata`) from layout/page for title, description, icons (see `src/constants/metadata.ts`).
+- **Server vs client**: Prefer server components. Use `"use client"` only in pages or components that need hooks/browser APIs; import client components as needed and keep the rest of the tree server-rendered.

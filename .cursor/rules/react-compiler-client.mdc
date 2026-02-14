@@ -1,0 +1,20 @@
+---
+description: React Compiler and "use client" / bundle boundaries
+globs: src/**/*.tsx
+alwaysApply: false
+---
+
+# React Compiler & client boundaries
+
+## React Compiler
+
+This project uses **babel-plugin-react-compiler**. Prefer plain React:
+
+- **Avoid manual memoization** (`useMemo`, `useCallback`, `React.memo`) unless there is a clear need (e.g. referential identity for a child prop, or measured perf issue).
+- **Avoid patterns the compiler does not support**: e.g. mutating props, relying on object/function identity across renders in a way that would break under compiler optimizations. Keep components and hooks pure where possible.
+
+## "use client" and bundle size
+
+- Add **`"use client"`** only in files that use hooks, browser APIs, or client-only libraries. Prefer server components by default.
+- **Keep client boundaries low**: Wrap only the subtree that needs interactivity (e.g. a single feature or form), not the whole layout, so the client bundle stays small.
+- When adding a new client-only dependency, consider whether it can live in a small leaf module rather than at the root layout.
