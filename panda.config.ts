@@ -95,7 +95,7 @@ export default defineConfig({
           brand: mint,
           success: green,
           warning: orange,
-          "incorrect-remedied": amber,
+          incorrectRemedied: amber,
           error: red,
           mint: mint,
           gray: sage,
