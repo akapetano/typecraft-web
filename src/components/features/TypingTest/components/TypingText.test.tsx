@@ -4,7 +4,7 @@ import { TypingText } from "@/components/features/TypingTest/components/TypingTe
 import type { CharacterState } from "@/components/features/TypingTest/TypingTest.types";
 
 describe("TypingText", () => {
-  const mockGetState = (index: number): CharacterState => "untyped";
+  const mockGetState = (_index: number): CharacterState => "pending";
 
   it("should render all characters from text", () => {
     render(<TypingText text="hello world" getCharacterState={mockGetState} />);

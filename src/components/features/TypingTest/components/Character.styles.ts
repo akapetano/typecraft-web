@@ -22,7 +22,7 @@ export const characterStyles = cva({
         textDecorationColor: "brand.9",
         borderRadius: "sm",
       },
-      "correct-first-try": {
+      correctFirstTry: {
         color: "success.10",
         bg: "success.a3",
       },
@@ -30,9 +30,9 @@ export const characterStyles = cva({
         color: "error.10",
         bg: "error.a3",
       },
-      "incorrect-remedied": {
-        color: "incorrect-remedied.10",
-        bg: "incorrect-remedied.a3",
+      incorrectRemedied: {
+        color: "incorrectRemedied.10",
+        bg: "incorrectRemedied.a3",
       },
     },
     punctuation: {
