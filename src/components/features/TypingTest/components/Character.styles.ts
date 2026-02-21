@@ -2,10 +2,11 @@ import { cva } from "styled-system/css";
 
 export const characterStyles = cva({
   base: {
-    fontSize: "2xl",
+    fontSize: "3xl",
     fontFamily: "code",
     transitionProperty: "color, background-color, text-decoration-color",
     transitionDuration: "faster",
+    borderRadius: "l2",
   },
   variants: {
     state: {
@@ -20,7 +21,6 @@ export const characterStyles = cva({
         textUnderlineOffset: "4px",
         textDecorationThickness: "2px",
         textDecorationColor: "brand.9",
-        borderRadius: "sm",
       },
       correctFirstTry: {
         color: "success.10",
