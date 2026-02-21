@@ -4,7 +4,9 @@ import { Character } from "@/components/features/TypingTest/components/Character
 
 describe("Character", () => {
   it("should apply correct state styling classes", () => {
-    const { container } = render(<Character char="a" state="correct" />);
+    const { container } = render(
+      <Character char="a" state="correctFirstTry" />,
+    );
     const element = container.firstChild as HTMLElement;
 
     // Check for Panda's success color class
@@ -12,7 +14,7 @@ describe("Character", () => {
   });
 
   it("should render space as non-breaking space", () => {
-    const { container } = render(<Character char=" " state="untyped" />);
+    const { container } = render(<Character char=" " state="pending" />);
     const span = container.firstChild as HTMLElement;
 
     // Check actual text content (not normalized by testing-library)
@@ -20,7 +22,7 @@ describe("Character", () => {
   });
 
   it("should detect punctuation and apply styling", () => {
-    const { container } = render(<Character char="." state="untyped" />);
+    const { container } = render(<Character char="." state="pending" />);
     const element = container.firstChild as HTMLElement;
 
     // Punctuation should have relaxed letter spacing
@@ -28,7 +30,7 @@ describe("Character", () => {
   });
 
   it("should not apply punctuation styling to letters", () => {
-    const { container } = render(<Character char="a" state="untyped" />);
+    const { container } = render(<Character char="a" state="pending" />);
     const element = container.firstChild as HTMLElement;
 
     // Letters should have relaxed spacing
