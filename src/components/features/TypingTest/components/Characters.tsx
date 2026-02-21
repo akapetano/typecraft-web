@@ -1,10 +1,10 @@
 import { Character } from "@/components/features/TypingTest/components/Character";
-import type { CharacterState } from "@/components/features/TypingTest/TypingTest.types";
+import type { DerivedCharacterState } from "@/components/features/TypingTest/TypingTest.types";
 
 interface CharactersProps {
   word: string;
   startIndex: number;
-  getCharacterState: (index: number) => CharacterState;
+  getCharacterState: (index: number) => DerivedCharacterState;
 }
 
 export function Characters({
