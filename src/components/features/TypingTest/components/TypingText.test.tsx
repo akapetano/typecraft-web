@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { TypingText } from "@/components/features/TypingTest/components/TypingText";
-import type { CharacterState } from "@/components/features/TypingTest/TypingTest.types";
+import type { DerivedCharacterState } from "@/components/features/TypingTest/TypingTest.types";
 
 describe("TypingText", () => {
-  const mockGetState = (_index: number): CharacterState => "pending";
+  const mockGetState = (_index: number): DerivedCharacterState => "pending";
 
   it("should render all characters from text", () => {
     render(<TypingText text="hello world" getCharacterState={mockGetState} />);

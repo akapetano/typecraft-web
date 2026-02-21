@@ -15,7 +15,7 @@ alwaysApply: false
 ## Types
 
 - Put feature/domain types in **`*.types.ts`** next to the feature (e.g.
-  `TypingTest.types.ts` with `Difficulty`, `CharacterState`).
+  `TypingTest.types.ts` with `Difficulty`, `DerivedCharacterState`).
 - Export **component props** from the component file (e.g.
   `export interface ButtonProps`,
   `export type HeadingProps = ComponentProps<typeof Heading>`).

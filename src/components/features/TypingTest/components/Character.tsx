@@ -1,10 +1,10 @@
 import { Span, type SpanProps } from "@/components/core/Span/Span";
 import { characterStyles } from "@/components/features/TypingTest/components/Character.styles";
-import type { CharacterState } from "@/components/features/TypingTest/TypingTest.types";
+import type { DerivedCharacterState } from "@/components/features/TypingTest/TypingTest.types";
 
 export interface CharacterProps extends SpanProps {
   char: string;
-  state: CharacterState;
+  state: DerivedCharacterState;
 }
 
 export function Character({ char, state, ...props }: CharacterProps) {
