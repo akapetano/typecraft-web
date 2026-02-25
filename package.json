@@ -11,7 +11,7 @@
     "prepare": "husky && panda codegen",
     "prepare:husky": "husky",
     "prepare:panda": "panda codegen",
-    "dev": "next dev",
+    "dev": "next dev -H local.typecraft",
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
