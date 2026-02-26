@@ -11,6 +11,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with
   - [🚀 Getting Started](#-getting-started)
   - [🌐 Automated Dependency Updates](#-automated-dependency-updates)
   - [🎨 Styling](#-styling)
+  - [🎨 Design System](#-design-system)
   - [🧪 Testing](#-testing)
   - [🔄 CI/CD Pipeline](#-cicd-pipeline)
   - [🎯 Code Quality \& Standards](#-code-quality--standards)
@@ -54,7 +55,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with
    ```
 
    This will also:
-
    - Set up Husky git hooks automatically
    - Generate Panda CSS types
 
@@ -122,6 +122,27 @@ After changing Panda configuration, regenerate types:
 ```bash
 pnpm prepare:panda
 ```
+
+## 🎨 Design System
+
+Typecraft uses a contract-driven Design System built on top of Panda CSS.
+
+The Design System defines:
+
+- Semantic token taxonomy (bg, fg, border, accent, status, typing)
+- Named theme architecture (`data-theme`)
+- Accent roles (primary / secondary / tertiary)
+- Neutral pairing strategy (Park UI pairing approach)
+- Motion principles (premium SaaS, restrained)
+
+### Principles
+
+- Components consume semantic roles, not raw color palettes.
+- Themes map roles at the root level.
+- v1 is intentionally minimal (3 accent roles + neutral pairing).
+- Accessibility and reduced motion are first-class concerns.
+
+Detailed documentation: `src/theme/docs/`
 
 ## 🧪 Testing
 
