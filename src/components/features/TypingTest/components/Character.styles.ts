@@ -16,11 +16,11 @@ export const characterStyles = cva({
       },
       current: {
         color: "fg",
-        bg: "brand.a2",
+        bg: "accent.primary.a2",
         textDecorationLine: "underline",
         textUnderlineOffset: "4px",
         textDecorationThickness: "2px",
-        textDecorationColor: "brand.9",
+        textDecorationColor: "accent.primary.9",
       },
       correctFirstTry: {
         color: "success.10",

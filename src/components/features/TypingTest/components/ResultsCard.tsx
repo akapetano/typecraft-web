@@ -22,7 +22,7 @@ export function ResultsCard({
   return (
     <Card.Root
       variant="elevated"
-      _hover={{ borderColor: "brand.solid.bg.hover" }}
+      _hover={{ borderColor: "accent.primary.solid.bg.hover" }}
       transition="colors"
     >
       <Card.Body p="8" textAlign="center">
@@ -37,7 +37,11 @@ export function ResultsCard({
             bg="secondary/50"
             rounded="lg"
           >
-            <Span fontSize="4xl" fontWeight="bold" color="brand.plain.fg">
+            <Span
+              fontSize="4xl"
+              fontWeight="bold"
+              color="accent.primary.plain.fg"
+            >
               {wpm}
             </Span>
             <Span fontSize="sm" color="fg.muted">
