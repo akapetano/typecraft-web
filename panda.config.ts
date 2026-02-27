@@ -54,6 +54,11 @@ export default defineConfig({
 
       semanticTokens: {
         colors: {
+          accent: {
+            primary: mint,
+            secondary: violet,
+            tertiary: sage,
+          },
           bg: {
             default: {
               value: {

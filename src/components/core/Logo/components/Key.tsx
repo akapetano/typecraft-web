@@ -1,6 +1,7 @@
 import { Fragment, type HTMLAttributes } from "react";
 import { css, cx } from "styled-system/css";
 import { styled } from "styled-system/jsx";
+import { token } from "styled-system/tokens";
 
 export type KeyRootProps = HTMLAttributes<SVGElement> & {
   width?: number;
@@ -46,15 +47,15 @@ export const Gradients = () => {
       >
         <styled.stop
           stopColor={{
-            base: "var(--colors-violet-8)",
-            _dark: "var(--colors-violet-3)",
+            base: token("colors.accent.secondary.8"),
+            _dark: token("colors.accent.secondary.3"),
           }}
         />
         <styled.stop
           offset="1"
           stopColor={{
-            base: "var(--colors-violet-12)",
-            _dark: "var(--colors-violet-7)",
+            base: token("colors.accent.secondary.12"),
+            _dark: token("colors.accent.secondary.7"),
           }}
         />
       </linearGradient>
@@ -69,15 +70,15 @@ export const Gradients = () => {
       >
         <styled.stop
           stopColor={{
-            base: "var(--colors-brand-7)",
-            _dark: "var(--colors-brand-12)",
+            base: token("colors.accent.primary.7"),
+            _dark: token("colors.accent.primary.12"),
           }}
         />
         <styled.stop
           offset="1"
           stopColor={{
-            base: "var(--colors-brand-4)",
-            _dark: "var(--colors-brand-9)",
+            base: token("colors.accent.primary.4"),
+            _dark: token("colors.accent.primary.9"),
           }}
         />
       </linearGradient>
@@ -101,7 +102,7 @@ export const KeyShadow = () => {
       width="68"
       height="70"
       rx="16"
-      fill="var(--colors-gray-12)"
+      fill={token("colors.gray.12")}
       opacity="0.15"
     />
   );
@@ -149,8 +150,8 @@ export const KeyHighlight = () => {
 export const CodeGlyph = () => {
   const pathClass = css({
     stroke: {
-      base: "var(--colors-violet-12)",
-      _dark: "var(--colors-violet-7)",
+      base: token("colors.accent.secondary.12"),
+      _dark: token("colors.accent.secondary.7"),
     },
   });
 

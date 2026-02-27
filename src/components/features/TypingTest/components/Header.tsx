@@ -8,7 +8,7 @@ export function Header() {
   return (
     <Box textAlign="center" spaceY="2">
       <Flex alignItems="center" justifyContent="center" gap="3">
-        <Icon size="xl" color="brand.10">
+        <Icon size="xl" color="accent.primary.10">
           <LucideIcon name="Keyboard" />
         </Icon>
         <Heading as="h2" color="fg.default">
