@@ -14,7 +14,7 @@ describe("Color Mode Integration", () => {
 
   it("renders with provided color mode", () => {
     render(
-      <RootShell colorMode="dark">
+      <RootShell colorMode="dark" theme="aurora">
         <AppLayout colorMode="dark">
           <div>Test Content</div>
         </AppLayout>
@@ -30,7 +30,7 @@ describe("Color Mode Integration", () => {
     const user = userEvent.setup();
 
     render(
-      <RootShell colorMode="light">
+      <RootShell colorMode="light" theme="aurora">
         <AppLayout colorMode="light">
           <div>Test Content</div>
         </AppLayout>
@@ -60,7 +60,7 @@ describe("Color Mode Integration", () => {
     const user = userEvent.setup();
 
     render(
-      <RootShell colorMode="light">
+      <RootShell colorMode="light" theme="aurora">
         <AppLayout colorMode="light">
           <div>Test Content</div>
         </AppLayout>
@@ -80,7 +80,7 @@ describe("Color Mode Integration", () => {
     const user = userEvent.setup();
 
     render(
-      <RootShell colorMode="light">
+      <RootShell colorMode="light" theme="aurora">
         <AppLayout colorMode="light">
           <div>Test Content</div>
         </AppLayout>
