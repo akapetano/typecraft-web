@@ -5,7 +5,7 @@ import { RootShell } from "./RootShell";
 describe("RootShell", () => {
   it("renders html element with default lang", () => {
     const { container } = render(
-      <RootShell>
+      <RootShell colorMode="light" theme="aurora">
         <div>Content</div>
       </RootShell>,
     );
@@ -16,7 +16,7 @@ describe("RootShell", () => {
 
   it("renders with custom lang prop", () => {
     const { container } = render(
-      <RootShell lang="es">
+      <RootShell colorMode="light" theme="aurora" lang="es">
         <div>Content</div>
       </RootShell>,
     );
@@ -27,7 +27,7 @@ describe("RootShell", () => {
 
   it("applies font variable classes to html", () => {
     const { container } = render(
-      <RootShell>
+      <RootShell colorMode="light" theme="aurora">
         <div>Content</div>
       </RootShell>,
     );
