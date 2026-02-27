@@ -66,8 +66,8 @@ export const input = {
           borderColor: "error",
         },
         _focus: {
-          borderColor: "colorPalette.solid.bg",
-          boxShadowColor: "colorPalette.solid.bg",
+          borderColor: "accent.primary.solid.bg",
+          boxShadowColor: "accent.primary.solid.bg",
           boxShadow: "0 1px 0 0 var(--shadow-color)",
           _invalid: {
             borderColor: "error",

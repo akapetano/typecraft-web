@@ -36,64 +36,64 @@ export const button = defineRecipe({
   variants: {
     variant: {
       solid: {
-        bg: "colorPalette.solid.bg",
-        color: "colorPalette.solid.fg",
+        bg: "accent.primary.solid.bg",
+        color: "accent.primary.solid.fg",
         _hover: {
-          bg: "colorPalette.solid.bg.hover",
+          bg: "accent.primary.solid.bg.hover",
         },
       },
       surface: {
-        bg: "colorPalette.surface.bg",
+        bg: "accent.primary.surface.bg",
         borderWidth: "1px",
-        borderColor: "colorPalette.surface.border",
-        color: "colorPalette.surface.fg",
+        borderColor: "accent.primary.surface.border",
+        color: "accent.primary.surface.fg",
         _hover: {
-          borderColor: "colorPalette.surface.border.hover",
+          borderColor: "accent.primary.surface.border.hover",
         },
         _active: {
-          bg: "colorPalette.surface.bg.active",
+          bg: "accent.primary.surface.bg.active",
         },
         _on: {
-          bg: "colorPalette.surface.bg.active",
+          bg: "accent.primary.surface.bg.active",
         },
       },
       subtle: {
-        bg: "colorPalette.subtle.bg",
-        color: "colorPalette.subtle.fg",
+        bg: "accent.primary.subtle.bg",
+        color: "accent.primary.subtle.fg",
         _hover: {
-          bg: "colorPalette.subtle.bg.hover",
+          bg: "accent.primary.subtle.bg.hover",
         },
         _active: {
-          bg: "colorPalette.subtle.bg.active",
+          bg: "accent.primary.subtle.bg.active",
         },
         _on: {
-          bg: "colorPalette.subtle.bg.active",
+          bg: "accent.primary.subtle.bg.active",
         },
       },
       outline: {
         borderWidth: "1px",
-        borderColor: "colorPalette.outline.border",
-        color: "colorPalette.outline.fg",
+        borderColor: "accent.primary.outline.border",
+        color: "accent.primary.outline.fg",
         _hover: {
-          bg: "colorPalette.outline.bg.hover",
+          bg: "accent.primary.outline.bg.hover",
         },
         _active: {
-          bg: "colorPalette.outline.bg.active",
+          bg: "accent.primary.outline.bg.active",
         },
         _on: {
-          bg: "colorPalette.outline.bg.active",
+          bg: "accent.primary.outline.bg.active",
         },
       },
       plain: {
-        color: "colorPalette.plain.fg",
+        color: "accent.primary.plain.fg",
         _hover: {
-          bg: "colorPalette.plain.bg.hover",
+          bg: "accent.primary.plain.bg.hover",
         },
         _active: {
-          bg: "colorPalette.plain.bg.active",
+          bg: "accent.primary.plain.bg.active",
         },
         _on: {
-          bg: "colorPalette.plain.bg.active",
+          bg: "accent.primary.plain.bg.active",
         },
       },
     },
