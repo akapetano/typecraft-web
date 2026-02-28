@@ -14,6 +14,7 @@ import { keyframes } from "@/theme/keyframes";
 import { layerStyles } from "@/theme/layer-styles";
 import { recipes, slotRecipes } from "@/theme/recipes";
 import { textStyles } from "@/theme/text-styles";
+import { APP_THEMES } from "@/theme/themes/index";
 import { colors } from "@/theme/tokens/colors";
 import { durations } from "@/theme/tokens/durations";
 import { shadows } from "@/theme/tokens/shadows";
@@ -54,11 +55,6 @@ export default defineConfig({
 
       semanticTokens: {
         colors: {
-          accent: {
-            primary: mint,
-            secondary: violet,
-            tertiary: sage,
-          },
           bg: {
             default: {
               value: {
@@ -128,6 +124,14 @@ export default defineConfig({
         },
       },
     },
+  },
+
+  themes: {
+    aurora: APP_THEMES.aurora,
+    mono: APP_THEMES.mono,
+  },
+  staticCss: {
+    themes: ["aurora", "mono"],
   },
 
   jsxFramework: "react",
