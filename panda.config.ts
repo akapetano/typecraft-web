@@ -1,11 +1,5 @@
 import { defineConfig } from "@pandacss/dev";
 import { animationStyles } from "@/theme/animation-styles";
-import { amber } from "@/theme/colors/amber";
-import { green } from "@/theme/colors/green";
-import { mint } from "@/theme/colors/mint";
-import { orange } from "@/theme/colors/orange";
-import { red } from "@/theme/colors/red";
-import { violet } from "@/theme/colors/violet";
 import { conditions } from "@/theme/conditions";
 import { fonts } from "@/theme/fonts";
 import { globalCss } from "@/theme/global-css";
@@ -16,7 +10,6 @@ import { textStyles } from "@/theme/text-styles";
 import { APP_THEMES, THEME_NAMES } from "@/theme/themes/index";
 import { colors } from "@/theme/tokens/colors";
 import { durations } from "@/theme/tokens/durations";
-import { shadows } from "@/theme/tokens/shadows";
 import { zIndex } from "@/theme/tokens/z-index";
 
 export default defineConfig({
@@ -50,38 +43,6 @@ export default defineConfig({
         durations,
         zIndex,
         fonts,
-      },
-
-      semanticTokens: {
-        colors: {
-          brand: mint,
-          success: green,
-          warning: orange,
-          incorrectRemedied: amber,
-          error: red,
-          mint: mint,
-          red,
-          orange,
-          amber,
-          green,
-          violet,
-        },
-
-        shadows: shadows,
-
-        radii: {
-          l1: {
-            value: "{radii.xs}",
-          },
-
-          l2: {
-            value: "{radii.sm}",
-          },
-
-          l3: {
-            value: "{radii.md}",
-          },
-        },
       },
     },
   },
