@@ -4,7 +4,7 @@ Provide a concise summary of the changes in this PR.
 
 ## Related Issue
 
-- Jira: [TY-XXX](link-to-jira-ticket)
+- Linear: [TY-XXX](link-to-jira-ticket)
 - GitHub Issue: #XXX (if applicable)
 
 ## Type of Change
