@@ -19,7 +19,7 @@ export const RootShell = ({
     <html
       lang={lang}
       data-color-mode={colorMode}
-      data-theme={theme}
+      data-panda-theme={theme}
       className={`${spaceGrotesk.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
