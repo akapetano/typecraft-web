@@ -20,6 +20,7 @@ export function TypingArea({ children, ...props }: CardRootProps) {
       }}
       transition="colors"
       tabIndex={0}
+      backgroundColor="bg.default"
       {...props}
     >
       {children}
