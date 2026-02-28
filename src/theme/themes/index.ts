@@ -5,3 +5,5 @@ export const APP_THEMES = {
   aurora: auroraTheme,
   mono: monoTheme,
 } as const;
+
+export const THEME_NAMES = ["aurora", "mono"];

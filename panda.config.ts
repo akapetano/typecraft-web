@@ -5,7 +5,6 @@ import { green } from "@/theme/colors/green";
 import { mint } from "@/theme/colors/mint";
 import { orange } from "@/theme/colors/orange";
 import { red } from "@/theme/colors/red";
-import { sage } from "@/theme/colors/sage";
 import { violet } from "@/theme/colors/violet";
 import { conditions } from "@/theme/conditions";
 import { fonts } from "@/theme/fonts";
@@ -14,7 +13,7 @@ import { keyframes } from "@/theme/keyframes";
 import { layerStyles } from "@/theme/layer-styles";
 import { recipes, slotRecipes } from "@/theme/recipes";
 import { textStyles } from "@/theme/text-styles";
-import { APP_THEMES } from "@/theme/themes/index";
+import { APP_THEMES, THEME_NAMES } from "@/theme/themes/index";
 import { colors } from "@/theme/tokens/colors";
 import { durations } from "@/theme/tokens/durations";
 import { shadows } from "@/theme/tokens/shadows";
@@ -55,56 +54,17 @@ export default defineConfig({
 
       semanticTokens: {
         colors: {
-          bg: {
-            default: {
-              value: {
-                _light: "{colors.white}",
-                _dark: "{colors.gray.1}",
-              },
-            },
-          },
-          fg: {
-            default: {
-              value: {
-                _light: "{colors.gray.12}",
-                _dark: "{colors.gray.12}",
-              },
-            },
-
-            muted: {
-              value: {
-                _light: "{colors.gray.11}",
-                _dark: "{colors.gray.11}",
-              },
-            },
-
-            subtle: {
-              value: {
-                _light: "{colors.gray.10}",
-                _dark: "{colors.gray.10}",
-              },
-            },
-          },
-
-          border: {
-            value: {
-              _light: "{colors.gray.4}",
-              _dark: "{colors.gray.4}",
-            },
-          },
-
           brand: mint,
           success: green,
           warning: orange,
           incorrectRemedied: amber,
           error: red,
           mint: mint,
-          gray: sage,
-          red: red,
-          orange: orange,
-          amber: amber,
-          green: green,
-          violet: violet,
+          red,
+          orange,
+          amber,
+          green,
+          violet,
         },
 
         shadows: shadows,
@@ -131,7 +91,7 @@ export default defineConfig({
     mono: APP_THEMES.mono,
   },
   staticCss: {
-    themes: ["aurora", "mono"],
+    themes: THEME_NAMES,
   },
 
   jsxFramework: "react",

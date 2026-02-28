@@ -8,6 +8,10 @@ export const defineAppTheme = defineThemeContract({
         secondary: {},
         tertiary: {},
       },
+      gray: {},
+      bg: { default: {} },
+      fg: { default: {}, muted: {}, subtle: {} },
+      border: {},
     },
   },
 });
