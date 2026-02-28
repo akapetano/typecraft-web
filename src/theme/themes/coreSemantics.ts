@@ -1,3 +1,9 @@
+import { amber } from "@/theme/colors/amber";
+import { green } from "@/theme/colors/green";
+import { orange } from "@/theme/colors/orange";
+import { red } from "@/theme/colors/red";
+import { shadows } from "../tokens/shadows";
+
 export const coreAppSemanticColors = {
   bg: {
     default: {
@@ -33,4 +39,26 @@ export const coreAppSemanticColors = {
       _dark: "{colors.gray.4}",
     },
   },
+  success: green,
+  warning: orange,
+  incorrectRemedied: amber,
+  error: red,
 } as const;
+
+export const coreAppSemanticTokens = {
+  shadows: shadows,
+
+  radii: {
+    l1: {
+      value: "{radii.xs}",
+    },
+
+    l2: {
+      value: "{radii.sm}",
+    },
+
+    l3: {
+      value: "{radii.md}",
+    },
+  },
+};

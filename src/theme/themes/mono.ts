@@ -1,6 +1,9 @@
 import { neutral } from "@/theme/colors/neutral";
 import { defineAppTheme } from "@/theme/themes/contract";
-import { coreAppSemanticColors } from "@/theme/themes/coreSemantics";
+import {
+  coreAppSemanticColors,
+  coreAppSemanticTokens,
+} from "@/theme/themes/coreSemantics";
 
 export const monoTheme = defineAppTheme({
   semanticTokens: {
@@ -13,5 +16,6 @@ export const monoTheme = defineAppTheme({
       gray: neutral,
       ...coreAppSemanticColors,
     },
+    ...coreAppSemanticTokens,
   },
 });

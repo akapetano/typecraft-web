@@ -2,7 +2,10 @@ import { mint } from "@/theme/colors/mint";
 import { sage } from "@/theme/colors/sage";
 import { violet } from "@/theme/colors/violet";
 import { defineAppTheme } from "@/theme/themes/contract";
-import { coreAppSemanticColors } from "@/theme/themes/coreSemantics";
+import {
+  coreAppSemanticColors,
+  coreAppSemanticTokens,
+} from "@/theme/themes/coreSemantics";
 
 export const auroraTheme = defineAppTheme({
   semanticTokens: {
@@ -15,5 +18,6 @@ export const auroraTheme = defineAppTheme({
       gray: sage,
       ...coreAppSemanticColors,
     },
+    ...coreAppSemanticTokens,
   },
 });
