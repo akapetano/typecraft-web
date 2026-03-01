@@ -5,6 +5,7 @@ import { defineAppTheme } from "@/theme/themes/contract";
 import {
   coreAppSemanticColors,
   coreAppSemanticTokens,
+  parkUiCompatPalettes,
 } from "@/theme/themes/coreSemantics";
 
 export const auroraTheme = defineAppTheme({
@@ -17,6 +18,7 @@ export const auroraTheme = defineAppTheme({
       },
       gray: sage,
       ...coreAppSemanticColors,
+      ...parkUiCompatPalettes,
     },
     ...coreAppSemanticTokens,
   },

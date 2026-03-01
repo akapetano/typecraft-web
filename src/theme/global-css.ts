@@ -1,5 +1,8 @@
 export const globalCss = {
   extend: {
+    html: {
+      colorPalette: "accent.primary",
+    },
     "*": {
       "--global-color-border": "colors.border",
       "--global-color-placeholder": "colors.fg.subtle",

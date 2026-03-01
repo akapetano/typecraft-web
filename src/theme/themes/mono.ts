@@ -3,6 +3,7 @@ import { defineAppTheme } from "@/theme/themes/contract";
 import {
   coreAppSemanticColors,
   coreAppSemanticTokens,
+  parkUiCompatPalettes,
 } from "@/theme/themes/coreSemantics";
 
 export const monoTheme = defineAppTheme({
@@ -15,6 +16,7 @@ export const monoTheme = defineAppTheme({
       },
       gray: neutral,
       ...coreAppSemanticColors,
+      ...parkUiCompatPalettes,
     },
     ...coreAppSemanticTokens,
   },
