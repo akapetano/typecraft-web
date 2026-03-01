@@ -1,8 +1,10 @@
 import { amber } from "@/theme/colors/amber";
 import { green } from "@/theme/colors/green";
+import { mint } from "@/theme/colors/mint";
 import { orange } from "@/theme/colors/orange";
 import { red } from "@/theme/colors/red";
-import { shadows } from "../tokens/shadows";
+import { violet } from "@/theme/colors/violet";
+import { shadows } from "@/theme/tokens/shadows";
 
 export const coreAppSemanticColors = {
   bg: {
@@ -43,6 +45,15 @@ export const coreAppSemanticColors = {
   warning: orange,
   incorrectRemedied: amber,
   error: red,
+} as const;
+
+export const parkUiCompatPalettes = {
+  red,
+  orange,
+  amber,
+  green,
+  violet,
+  mint,
 } as const;
 
 export const coreAppSemanticTokens = {
