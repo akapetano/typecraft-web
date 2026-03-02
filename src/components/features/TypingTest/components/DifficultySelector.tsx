@@ -18,9 +18,10 @@ export function DifficultySelector({
         <Button
           key={diff}
           variant={difficulty === diff ? "solid" : "outline"}
+          tone="secondary"
           size="sm"
-          onClick={() => handleDifficultyChange(diff)}
           className="capitalize"
+          onClick={() => handleDifficultyChange(diff)}
         >
           {diff}
         </Button>
