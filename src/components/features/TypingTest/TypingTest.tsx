@@ -48,10 +48,10 @@ export function TypingTest() {
         handleDifficultyChange={handleDifficultyChange}
       />
       <TypingArea
-        onClick={handleContainerClick}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") handleContainerClick();
         }}
+        onClick={handleContainerClick}
       >
         <TypingText text={text} getCharacterState={getCharacterState} />
         <HiddenInput ref={inputRef} value={typedText} onChange={handleInput} />
