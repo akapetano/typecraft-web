@@ -1,4 +1,16 @@
 import type { RecipeConfig } from "@pandacss/dev";
+import { createInputToneCss } from "@/utils/tone";
+
+const TONES = ["primary", "secondary", "tertiary"] as const;
+const VARIANTS = ["outline", "surface", "subtle", "flushed"] as const;
+
+const compoundVariants = TONES.flatMap((tone) =>
+  VARIANTS.map((variant) => ({
+    tone,
+    variant,
+    css: createInputToneCss(tone, variant),
+  })),
+);
 
 export const input = {
   className: "input",
@@ -21,6 +33,7 @@ export const input = {
   defaultVariants: {
     size: "md",
     variant: "outline",
+    tone: "primary",
   },
   variants: {
     variant: {
@@ -76,6 +89,11 @@ export const input = {
         },
       },
     },
+    tone: {
+      primary: {},
+      secondary: {},
+      tertiary: {},
+    },
     size: {
       "2xs": { textStyle: "xs", px: "1.5", "--input-height": "sizes.7" },
       xs: { textStyle: "sm", px: "2", "--input-height": "sizes.8" },
@@ -86,4 +104,5 @@ export const input = {
       "2xl": { textStyle: "3xl", px: "4.5", "--input-height": "sizes.16" },
     },
   },
+  compoundVariants,
 } satisfies RecipeConfig;
