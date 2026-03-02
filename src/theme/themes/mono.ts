@@ -1,4 +1,4 @@
-import { neutral } from "@/theme/colors/neutral";
+import { NEUTRAL_PALETTES } from "@/theme/colors/neutrals";
 import { defineAppTheme } from "@/theme/themes/contract";
 import {
   coreAppSemanticColors,
@@ -10,11 +10,11 @@ export const monoTheme = defineAppTheme({
   semanticTokens: {
     colors: {
       accent: {
-        primary: neutral,
-        secondary: neutral,
-        tertiary: neutral,
+        primary: NEUTRAL_PALETTES.neutral,
+        secondary: NEUTRAL_PALETTES.neutral,
+        tertiary: NEUTRAL_PALETTES.neutral,
       },
-      gray: neutral,
+      gray: NEUTRAL_PALETTES.neutral,
       ...coreAppSemanticColors,
       ...parkUiCompatPalettes,
     },
