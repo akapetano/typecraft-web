@@ -11,10 +11,10 @@ export function Controls({ initializeTest }: ControlsProps) {
   return (
     <Flex justifyContent="center">
       <Button
-        onClick={initializeTest}
         variant="outline"
         size="lg"
         className="gap-2 bg-transparent"
+        onClick={initializeTest}
       >
         <Icon h="4" w="4">
           <LucideIcon name="RotateCcw" />

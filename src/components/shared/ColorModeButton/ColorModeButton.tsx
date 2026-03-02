@@ -24,9 +24,9 @@ export const ColorModeButton = ({
   return (
     <IconButton
       aria-label="Color mode toggler"
-      onClick={toggleColorMode}
       rounded="full"
       variant="subtle"
+      onClick={toggleColorMode}
     >
       <Icon>{colorModeIcon}</Icon>
     </IconButton>
