@@ -1,5 +1,5 @@
 import { mint } from "@/theme/colors/mint";
-import { sage } from "@/theme/colors/sage";
+import { NEUTRAL_PALETTES } from "@/theme/colors/neutrals";
 import { violet } from "@/theme/colors/violet";
 import { defineAppTheme } from "@/theme/themes/contract";
 import {
@@ -14,9 +14,9 @@ export const auroraTheme = defineAppTheme({
       accent: {
         primary: mint,
         secondary: violet,
-        tertiary: sage,
+        tertiary: NEUTRAL_PALETTES.sage,
       },
-      gray: sage,
+      gray: NEUTRAL_PALETTES.slate,
       ...coreAppSemanticColors,
       ...parkUiCompatPalettes,
     },
