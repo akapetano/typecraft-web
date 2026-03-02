@@ -1,4 +1,16 @@
 import { defineRecipe } from "@pandacss/dev";
+import { createButtonToneCss } from "@/utils/tone";
+
+const TONES = ["primary", "secondary", "tertiary"] as const;
+const VARIANTS = ["solid", "surface", "subtle", "outline", "plain"] as const;
+
+const compoundVariants = TONES.flatMap((tone) =>
+  VARIANTS.map((variant) => ({
+    tone,
+    variant,
+    css: createButtonToneCss(tone, variant),
+  })),
+);
 
 export const button = defineRecipe({
   className: "button",
@@ -32,70 +44,15 @@ export const button = defineRecipe({
   defaultVariants: {
     variant: "solid",
     size: "md",
+    tone: "primary",
   },
   variants: {
     variant: {
-      solid: {
-        bg: "accent.primary.solid.bg",
-        color: "accent.primary.solid.fg",
-        _hover: {
-          bg: "accent.primary.solid.bg.hover",
-        },
-      },
-      surface: {
-        bg: "accent.primary.surface.bg",
-        borderWidth: "1px",
-        borderColor: "accent.primary.surface.border",
-        color: "accent.primary.surface.fg",
-        _hover: {
-          borderColor: "accent.primary.surface.border.hover",
-        },
-        _active: {
-          bg: "accent.primary.surface.bg.active",
-        },
-        _on: {
-          bg: "accent.primary.surface.bg.active",
-        },
-      },
-      subtle: {
-        bg: "accent.primary.subtle.bg",
-        color: "accent.primary.subtle.fg",
-        _hover: {
-          bg: "accent.primary.subtle.bg.hover",
-        },
-        _active: {
-          bg: "accent.primary.subtle.bg.active",
-        },
-        _on: {
-          bg: "accent.primary.subtle.bg.active",
-        },
-      },
-      outline: {
-        borderWidth: "1px",
-        borderColor: "accent.primary.outline.border",
-        color: "accent.primary.outline.fg",
-        _hover: {
-          bg: "accent.primary.outline.bg.hover",
-        },
-        _active: {
-          bg: "accent.primary.outline.bg.active",
-        },
-        _on: {
-          bg: "accent.primary.outline.bg.active",
-        },
-      },
-      plain: {
-        color: "accent.primary.plain.fg",
-        _hover: {
-          bg: "accent.primary.plain.bg.hover",
-        },
-        _active: {
-          bg: "accent.primary.plain.bg.active",
-        },
-        _on: {
-          bg: "accent.primary.plain.bg.active",
-        },
-      },
+      solid: {},
+      surface: {},
+      subtle: {},
+      outline: {},
+      plain: {},
     },
     size: {
       "2xs": {
@@ -148,5 +105,11 @@ export const button = defineRecipe({
         _icon: { boxSize: "6" },
       },
     },
+    tone: {
+      primary: {},
+      secondary: {},
+      tertiary: {},
+    },
   },
+  compoundVariants,
 });
