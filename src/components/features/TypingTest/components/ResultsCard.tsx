@@ -77,7 +77,7 @@ export function ResultsCard({
             </Span>
           </Flex>
         </Grid>
-        <Button onClick={onRestart} size="lg" gap="2">
+        <Button size="lg" gap="2" onClick={onRestart}>
           <Icon h="4" w="4">
             <LucideIcon name="RotateCcw" />
           </Icon>
