@@ -1,6 +1,7 @@
+import { iris } from "@/theme/colors/iris";
 import { mint } from "@/theme/colors/mint";
 import { NEUTRAL_PALETTES } from "@/theme/colors/neutrals";
-import { violet } from "@/theme/colors/violet";
+import { sky } from "@/theme/colors/sky";
 import { defineAppTheme } from "@/theme/themes/contract";
 import {
   coreAppSemanticColors,
@@ -13,8 +14,8 @@ export const auroraTheme = defineAppTheme({
     colors: {
       accent: {
         primary: mint,
-        secondary: violet,
-        tertiary: NEUTRAL_PALETTES.sage,
+        secondary: iris,
+        tertiary: sky,
       },
       gray: NEUTRAL_PALETTES.slate,
       ...coreAppSemanticColors,
