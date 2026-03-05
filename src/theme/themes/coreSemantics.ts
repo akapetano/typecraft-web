@@ -1,8 +1,10 @@
 import { amber } from "@/theme/colors/amber";
 import { green } from "@/theme/colors/green";
+import { iris } from "@/theme/colors/iris";
 import { mint } from "@/theme/colors/mint";
 import { orange } from "@/theme/colors/orange";
 import { red } from "@/theme/colors/red";
+import { sky } from "@/theme/colors/sky";
 import { violet } from "@/theme/colors/violet";
 import { shadows } from "@/theme/tokens/shadows";
 
@@ -54,6 +56,8 @@ export const parkUiCompatPalettes = {
   green,
   violet,
   mint,
+  iris,
+  sky,
 } as const;
 
 export const coreAppSemanticTokens = {
