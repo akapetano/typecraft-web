@@ -13,6 +13,7 @@ export function Controls({ initializeTest }: ControlsProps) {
       <Button
         variant="outline"
         size="lg"
+        tone="tertiary"
         className="gap-2 bg-transparent"
         onClick={initializeTest}
       >
