@@ -23,7 +23,7 @@ export const ColorModeSwitcher = ({
 
   return (
     <IconButton
-      aria-label="Color mode toggler"
+      aria-label="Color mode switcher"
       rounded="full"
       variant="subtle"
       onClick={toggleColorMode}
