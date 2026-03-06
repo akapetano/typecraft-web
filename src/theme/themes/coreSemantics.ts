@@ -6,6 +6,7 @@ import { orange } from "@/theme/colors/orange";
 import { red } from "@/theme/colors/red";
 import { sky } from "@/theme/colors/sky";
 import { violet } from "@/theme/colors/violet";
+import { radii } from "@/theme/tokens/radii";
 import { shadows } from "@/theme/tokens/shadows";
 
 export const coreAppSemanticColors = {
@@ -77,20 +78,7 @@ export const parkUiCompatPalettes = {
   sky,
 } as const;
 
-export const coreAppSemanticTokens = {
+export const coreAppSharedSemantics = {
   shadows: shadows,
-
-  radii: {
-    l1: {
-      value: "{radii.xs}",
-    },
-
-    l2: {
-      value: "{radii.sm}",
-    },
-
-    l3: {
-      value: "{radii.md}",
-    },
-  },
+  radii: radii,
 };
