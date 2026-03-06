@@ -78,4 +78,13 @@ export const Menu = {
   Indicator,
   Item,
   ItemGroup,
+  ItemGroupLabel,
+  ItemText,
+  Positioner,
+  RadioItem,
+  RadioItemGroup,
+  Separator,
+  Trigger,
+  TriggerItem,
+  ItemIndicator,
 };
