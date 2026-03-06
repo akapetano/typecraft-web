@@ -1,6 +1,6 @@
 import { Box, Container, HStack } from "styled-system/jsx";
 import { Logo } from "@/components/core/Logo/Logo";
-import { ColorModeButton } from "@/components/shared/ColorModeButton/ColorModeButton";
+import { ColorModeSwitcher } from "@/components/shared/ColorModeSwitcher/ColorModeSwitcher";
 import type { ColorMode } from "@/types/theme/colorMode";
 
 interface HeaderProps {
@@ -13,7 +13,7 @@ export const Header = ({ colorMode }: HeaderProps) => {
       <Container maxWidth="breakpoint-xl">
         <HStack justifyContent="space-between" alignItems="center">
           <Logo />
-          <ColorModeButton colorMode={colorMode} />
+          <ColorModeSwitcher colorMode={colorMode} />
         </HStack>
       </Container>
     </Box>

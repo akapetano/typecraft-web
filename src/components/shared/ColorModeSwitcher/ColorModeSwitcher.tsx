@@ -11,13 +11,13 @@ const iconNameMap = {
   dark: "Moon",
 } as const;
 
-interface ColorModeButtonProps {
+interface ColorModeSwitcherProps {
   colorMode?: ColorMode;
 }
 
-export const ColorModeButton = ({
+export const ColorModeSwitcher = ({
   colorMode: initialColorMode,
-}: ColorModeButtonProps) => {
+}: ColorModeSwitcherProps) => {
   const { colorMode, toggleColorMode } = useColorMode(initialColorMode);
   const colorModeIcon = <LucideIcon name={iconNameMap[colorMode]} />;
 
