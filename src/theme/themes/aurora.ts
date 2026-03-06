@@ -5,7 +5,7 @@ import { sky } from "@/theme/colors/sky";
 import { defineAppTheme } from "@/theme/themes/contract";
 import {
   coreAppSemanticColors,
-  coreAppSemanticTokens,
+  coreAppSharedSemantics,
   parkUiCompatPalettes,
 } from "@/theme/themes/coreSemantics";
 
@@ -21,6 +21,6 @@ export const auroraTheme = defineAppTheme({
       ...coreAppSemanticColors,
       ...parkUiCompatPalettes,
     },
-    ...coreAppSemanticTokens,
+    ...coreAppSharedSemantics,
   },
 });

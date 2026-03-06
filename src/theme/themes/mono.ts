@@ -2,7 +2,7 @@ import { NEUTRAL_PALETTES } from "@/theme/colors/neutrals";
 import { defineAppTheme } from "@/theme/themes/contract";
 import {
   coreAppSemanticColors,
-  coreAppSemanticTokens,
+  coreAppSharedSemantics,
   parkUiCompatPalettes,
 } from "@/theme/themes/coreSemantics";
 
@@ -18,6 +18,6 @@ export const monoTheme = defineAppTheme({
       ...coreAppSemanticColors,
       ...parkUiCompatPalettes,
     },
-    ...coreAppSemanticTokens,
+    ...coreAppSharedSemantics,
   },
 });
