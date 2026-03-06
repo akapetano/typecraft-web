@@ -12,6 +12,27 @@ export const defineAppTheme = defineThemeContract({
       bg: { default: {} },
       fg: { default: {}, muted: {}, subtle: {} },
       border: {},
+      success: {},
+      warning: {},
+      error: {},
+      typing: {
+        current: {
+          bg: {},
+          underline: {},
+        },
+        correct: {
+          fg: {},
+          bg: {},
+        },
+        incorrect: {
+          fg: {},
+          bg: {},
+        },
+        incorrectRemedied: {
+          fg: {},
+          bg: {},
+        },
+      },
     },
   },
 });
