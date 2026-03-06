@@ -12,11 +12,14 @@ export const ThemeInitScript = ({
   <Script id="theme-init" strategy="beforeInteractive">{`
     (function() {
       try {
-        const stored = localStorage.getItem('theme');
+        const name = 'theme';
         const themes = ${JSON.stringify(THEMES)};
+        const raw = document.cookie.split(';').find(function(c) { return c.trim().startsWith(name + '='); });
+        const stored = raw ? raw.split('=')[1].trim() : null;
         const isValid = stored && themes.includes(stored);
         const theme = isValid ? stored : '${defaultTheme}';
-        document.documentElement.dataset.theme = theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.dataset.pandaTheme = theme;
       } catch (_) {}
     })();
   `}</Script>
