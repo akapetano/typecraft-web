@@ -15,24 +15,24 @@ export const characterStyles = cva({
         opacity: 0.6,
       },
       current: {
-        color: "fg",
-        bg: "accent.primary.a2",
+        color: "fg.default",
+        bg: "typing.current.bg",
         textDecorationLine: "underline",
         textUnderlineOffset: "4px",
         textDecorationThickness: "2px",
-        textDecorationColor: "accent.primary.9",
+        textDecorationColor: "typing.current.underline",
       },
       correctFirstTry: {
-        color: "success.10",
-        bg: "success.a3",
+        color: "typing.correct.fg",
+        bg: "typing.correct.bg",
       },
       incorrect: {
-        color: "error.10",
-        bg: "error.a3",
+        color: "typing.incorrect.fg",
+        bg: "typing.incorrect.bg",
       },
       incorrectRemedied: {
-        color: "incorrectRemedied.10",
-        bg: "incorrectRemedied.a3",
+        color: "typing.incorrectRemedied.fg",
+        bg: "typing.incorrectRemedied.bg",
       },
     },
     punctuation: {

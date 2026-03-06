@@ -44,9 +44,26 @@ export const coreAppSemanticColors = {
     },
   },
   success: green,
-  warning: orange,
-  incorrectRemedied: amber,
+  warning: amber,
   error: red,
+  typing: {
+    current: {
+      bg: { value: "{colors.accent.primary.a2}" },
+      underline: { value: "{colors.accent.primary.9}" },
+    },
+    correct: {
+      fg: { value: "{colors.success.10}" },
+      bg: { value: "{colors.success.a3}" },
+    },
+    incorrect: {
+      fg: { value: "{colors.error.10}" },
+      bg: { value: "{colors.error.a3}" },
+    },
+    incorrectRemedied: {
+      fg: { value: "{colors.warning.10}" },
+      bg: { value: "{colors.warning.a3}" },
+    },
+  },
 } as const;
 
 export const parkUiCompatPalettes = {
