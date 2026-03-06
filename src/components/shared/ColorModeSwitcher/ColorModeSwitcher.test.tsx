@@ -1,6 +1,6 @@
 import { describe, it } from "vitest";
 
-describe("ColorModeButton", () => {
+describe("ColorModeSwitcher", () => {
   it("renders with correct icon for light mode", () => {
     // Verify Sun icon
   });
