@@ -34,5 +34,21 @@ export const defineAppTheme = defineThemeContract({
         },
       },
     },
+
+    shadows: {
+      xs: {},
+      sm: {},
+      md: {},
+      lg: {},
+      xl: {},
+      "2xl": {},
+      inset: {},
+    },
+
+    radii: {
+      l1: {},
+      l2: {},
+      l3: {},
+    },
   },
 });
