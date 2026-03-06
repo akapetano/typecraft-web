@@ -5,6 +5,7 @@ import { group } from "./group";
 import { heading } from "./heading";
 import { icon } from "./icon";
 import { input } from "./input";
+import { menu } from "./menu";
 import { spinner } from "./spinner";
 import { text } from "./text";
 
@@ -17,5 +18,6 @@ export const recipes = {
   heading,
   icon,
   input,
+  menu,
 };
 export const slotRecipes = { card };
