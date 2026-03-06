@@ -8,6 +8,7 @@ describe("Color Mode Integration", () => {
   beforeEach(() => {
     // Clear any existing color mode settings
     document.documentElement.removeAttribute("data-color-mode");
+    // biome-ignore lint/suspicious/noDocumentCookie: test setup
     document.cookie =
       "color-mode=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   });
@@ -44,7 +45,7 @@ describe("Color Mode Integration", () => {
     );
 
     // Find and click the color mode button
-    const button = screen.getByRole("button", { name: /color mode toggler/i });
+    const button = screen.getByRole("button", { name: /color mode switcher/i });
     await user.click(button);
 
     // Should switch to dark mode
@@ -67,7 +68,7 @@ describe("Color Mode Integration", () => {
       </RootShell>,
     );
 
-    const button = screen.getByRole("button", { name: /color mode toggler/i });
+    const button = screen.getByRole("button", { name: /color mode switcher/i });
     await user.click(button);
 
     await waitFor(() => {
@@ -89,7 +90,7 @@ describe("Color Mode Integration", () => {
 
     // Get all color mode buttons (header has one)
     const buttons = screen.getAllByRole("button", {
-      name: /color mode toggler/i,
+      name: /color mode switcher/i,
     });
 
     // Click first button
