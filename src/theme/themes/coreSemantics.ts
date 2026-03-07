@@ -22,6 +22,7 @@ import { tomato } from "@/theme/colors/tomato";
 import { violet } from "@/theme/colors/violet";
 import { radii } from "@/theme/tokens/radii";
 import { shadows } from "@/theme/tokens/shadows";
+import { bronze } from "../colors/bronze";
 
 export const coreAppSemanticColors = {
   bg: {
@@ -103,6 +104,7 @@ export const parkUiCompatPalettes = {
   gold,
   plum,
   brown,
+  bronze,
   ...NEUTRAL_PALETTES,
 } as const;
 
