@@ -1,11 +1,11 @@
 import { auroraTheme } from "@/theme/themes/aurora";
+import { duskTheme } from "@/theme/themes/dusk/dusk";
 import { emberTheme } from "@/theme/themes/ember";
 import { forestTheme } from "@/theme/themes/forest";
 import { monoTheme } from "@/theme/themes/mono";
 import { neonTheme } from "@/theme/themes/neon";
 import { oceanTheme } from "@/theme/themes/ocean";
 import { sakuraTheme } from "@/theme/themes/sakura";
-import { sunsetTheme } from "@/theme/themes/sunset";
 import { vintageTheme } from "@/theme/themes/vintage";
 import { THEMES, type Theme } from "@/types/theme/theme";
 
@@ -17,7 +17,7 @@ export type AppThemeConfig =
   | typeof neonTheme
   | typeof oceanTheme
   | typeof sakuraTheme
-  | typeof sunsetTheme
+  | typeof duskTheme
   | typeof vintageTheme;
 
 const THEME_ENTRIES: [Theme, AppThemeConfig][] = [
@@ -26,7 +26,7 @@ const THEME_ENTRIES: [Theme, AppThemeConfig][] = [
   ["forest", forestTheme],
   ["ocean", oceanTheme],
   ["ember", emberTheme],
-  ["sunset", sunsetTheme],
+  ["dusk", duskTheme],
   ["neon", neonTheme],
   ["vintage", vintageTheme],
   ["sakura", sakuraTheme],
