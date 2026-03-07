@@ -8,6 +8,8 @@ import {
   coreAppSharedSemantics,
   parkUiCompatPalettes,
 } from "@/theme/themes/coreSemantics";
+import { sakuraColorOverrides } from "@/theme/themes/sakura/colors";
+import { sakuraTokenOverrides } from "@/theme/themes/sakura/tokens";
 
 const sakuraSemantic = defineAppTheme({
   semanticTokens: {
@@ -19,54 +21,11 @@ const sakuraSemantic = defineAppTheme({
       },
       gray: NEUTRAL_PALETTES.mauve,
       ...coreAppSemanticColors,
-      bg: {
-        default: {
-          value: {
-            _light: "{colors.gray.1}",
-            _dark: "{colors.gray.1}",
-          },
-        },
-      },
-      border: {
-        value: {
-          _light: "{colors.gray.4}",
-          _dark: "{colors.gray.4}",
-        },
-      },
-      typing: {
-        current: {
-          bg: { value: "{colors.accent.primary.a2}" },
-          underline: { value: "{colors.accent.primary.8}" },
-        },
-        correct: {
-          fg: { value: "{colors.success.10}" },
-          bg: { value: "{colors.success.a3}" },
-        },
-        incorrect: {
-          fg: { value: "{colors.error.10}" },
-          bg: { value: "{colors.error.a3}" },
-        },
-        incorrectRemedied: {
-          fg: { value: "{colors.accent.tertiary.10}" },
-          bg: { value: "{colors.accent.tertiary.a3}" },
-        },
-      },
+      ...sakuraColorOverrides,
       ...parkUiCompatPalettes,
     },
     ...coreAppSharedSemantics,
-    radii: {
-      l1: {
-        value: "{radii.sm}",
-      },
-
-      l2: {
-        value: "{radii.md}",
-      },
-
-      l3: {
-        value: "{radii.lg}",
-      },
-    },
+    ...sakuraTokenOverrides,
   },
 });
 
