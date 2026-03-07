@@ -8,7 +8,7 @@ import {
   coreAppSharedSemantics,
   parkUiCompatPalettes,
 } from "@/theme/themes/coreSemantics";
-import { forestColorOverrides } from "@/theme/themes/forest/tokens/colors";
+import { forestColorOverrides } from "@/theme/themes/forest/colors";
 
 const forestSemantic = defineAppTheme({
   semanticTokens: {

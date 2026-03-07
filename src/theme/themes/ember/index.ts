@@ -8,7 +8,7 @@ import {
   coreAppSharedSemantics,
   parkUiCompatPalettes,
 } from "@/theme/themes/coreSemantics";
-import { emberColorOverrides } from "@/theme/themes/ember/tokens/colors";
+import { emberColorOverrides } from "@/theme/themes/ember/colors";
 
 const emberSemantic = defineAppTheme({
   semanticTokens: {
