@@ -33,6 +33,11 @@ export const ThemeSwitcher = ({ theme: initialTheme }: ThemeSwitcherProps) => {
                 key={themeOption.value}
                 value={themeOption.value}
                 justifyContent="space-between"
+                bgColor={
+                  themeOption.value === theme
+                    ? "accent.primary.subtle.bg"
+                    : "bg.default"
+                }
               >
                 {themeOption.label}
                 <ThemeMarble theme={themeOption.value} />
