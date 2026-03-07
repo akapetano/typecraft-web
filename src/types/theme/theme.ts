@@ -4,7 +4,7 @@ export const THEMES = [
   "forest",
   "ocean",
   "ember",
-  "sunset",
+  "dusk",
   "neon",
   "sakura",
   "vintage",
