@@ -8,6 +8,8 @@ import {
   coreAppSharedSemantics,
   parkUiCompatPalettes,
 } from "@/theme/themes/coreSemantics";
+import { neonColorOverrides } from "@/theme/themes/neon/colors";
+import { neonTokenOverrides } from "@/theme/themes/neon/tokens";
 
 const neonSemantic = defineAppTheme({
   semanticTokens: {
@@ -19,9 +21,11 @@ const neonSemantic = defineAppTheme({
       },
       gray: NEUTRAL_PALETTES.slate,
       ...coreAppSemanticColors,
+      ...neonColorOverrides,
       ...parkUiCompatPalettes,
     },
     ...coreAppSharedSemantics,
+    ...neonTokenOverrides,
   },
 });
 
