@@ -9,6 +9,7 @@ export const THEME_META: Record<Theme, ThemeMeta> = {
   aurora: { value: "aurora", label: "Aurora" },
   mono: { value: "mono", label: "Mono" },
   forest: { value: "forest", label: "Forest" },
+  ocean: { value: "ocean", label: "Ocean" },
 };
 
 export const THEME_OPTIONS = Object.values(THEME_META);
