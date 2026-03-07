@@ -1,14 +1,19 @@
 import { amber } from "@/theme/colors/amber";
+import { brown } from "@/theme/colors/brown";
 import { crimson } from "@/theme/colors/crimson";
 import { cyan } from "@/theme/colors/cyan";
+import { gold } from "@/theme/colors/gold";
 import { grass } from "@/theme/colors/grass";
 import { green } from "@/theme/colors/green";
 import { iris } from "@/theme/colors/iris";
 import { jade } from "@/theme/colors/jade";
 import { lime } from "@/theme/colors/lime";
 import { mint } from "@/theme/colors/mint";
+import { NEUTRAL_PALETTES } from "@/theme/colors/neutrals";
 import { orange } from "@/theme/colors/orange";
 import { pink } from "@/theme/colors/pink";
+import { plum } from "@/theme/colors/plum";
+import { purple } from "@/theme/colors/purple";
 import { red } from "@/theme/colors/red";
 import { ruby } from "@/theme/colors/ruby";
 import { sky } from "@/theme/colors/sky";
@@ -94,6 +99,11 @@ export const parkUiCompatPalettes = {
   crimson,
   ruby,
   pink,
+  purple,
+  gold,
+  plum,
+  brown,
+  ...NEUTRAL_PALETTES,
 } as const;
 
 export const coreAppSharedSemantics = {
