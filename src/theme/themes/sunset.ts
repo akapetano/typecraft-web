@@ -17,7 +17,7 @@ const sunsetSemantic = defineAppTheme({
         secondary: ruby,
         tertiary: pink,
       },
-      gray: NEUTRAL_PALETTES.sand,
+      gray: NEUTRAL_PALETTES.mauve,
       ...coreAppSemanticColors,
       ...parkUiCompatPalettes,
     },
