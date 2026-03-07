@@ -8,7 +8,7 @@ import {
   coreAppSharedSemantics,
   parkUiCompatPalettes,
 } from "@/theme/themes/coreSemantics";
-import { duskColorOverrides } from "@/theme/themes/dusk/tokens/colors";
+import { duskColorOverrides } from "@/theme/themes/dusk/colors";
 
 const duskSemantic = defineAppTheme({
   semanticTokens: {

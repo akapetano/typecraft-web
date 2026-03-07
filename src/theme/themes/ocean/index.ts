@@ -8,7 +8,7 @@ import {
   coreAppSharedSemantics,
   parkUiCompatPalettes,
 } from "@/theme/themes/coreSemantics";
-import { oceanColorOverrides } from "@/theme/themes/ocean/tokens/colors";
+import { oceanColorOverrides } from "@/theme/themes/ocean/colors";
 
 const oceanSemantic = defineAppTheme({
   semanticTokens: {
