@@ -7,7 +7,7 @@ interface IThemeInitScriptProps {
 }
 
 export const ThemeInitScript = ({
-  defaultTheme = "aurora",
+  defaultTheme = THEMES[0],
 }: IThemeInitScriptProps) => (
   <Script id="theme-init" strategy="beforeInteractive">{`
     (function() {
