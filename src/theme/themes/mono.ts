@@ -6,7 +6,7 @@ import {
   parkUiCompatPalettes,
 } from "@/theme/themes/coreSemantics";
 
-export const monoTheme = defineAppTheme({
+const monoSemantic = defineAppTheme({
   semanticTokens: {
     colors: {
       accent: {
@@ -21,3 +21,15 @@ export const monoTheme = defineAppTheme({
     ...coreAppSharedSemantics,
   },
 });
+
+export const monoTheme = {
+  ...monoSemantic,
+  tokens: {
+    gradients: {
+      marble: {
+        value:
+          "linear-gradient(220deg, var(--colors-gray-12), var(--colors-gray-2))",
+      },
+    },
+  },
+};
