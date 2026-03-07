@@ -5,7 +5,7 @@ import {
   coreAppSharedSemantics,
   parkUiCompatPalettes,
 } from "@/theme/themes/coreSemantics";
-import { monoSharedTokens } from "@/theme/themes/mono/tokens";
+import { monoTokenOverrides } from "@/theme/themes/mono/tokens";
 
 const monoSemantic = defineAppTheme({
   semanticTokens: {
@@ -27,7 +27,7 @@ const monoSemantic = defineAppTheme({
       ...parkUiCompatPalettes,
     },
     ...coreAppSharedSemantics,
-    ...monoSharedTokens,
+    ...monoTokenOverrides,
   },
 });
 
