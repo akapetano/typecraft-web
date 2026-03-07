@@ -5,6 +5,9 @@ export const THEMES = [
   "ocean",
   "ember",
   "sunset",
+  "neon",
+  "sakura",
+  "vintage",
 ] as const;
 
 export type Theme = (typeof THEMES)[number];
