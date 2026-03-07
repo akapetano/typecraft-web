@@ -1,7 +1,7 @@
 import { css, cx } from "styled-system/css";
 import type { BoxProps } from "styled-system/jsx";
 import { Box } from "styled-system/jsx";
-import { THEME_META } from "@/theme/themes/meta";
+import { marble } from "styled-system/recipes";
 import type { Theme } from "@/types/theme/theme";
 
 type ThemeMarbleProps = BoxProps & {
@@ -16,18 +16,16 @@ export function ThemeMarble({
   className,
   ...props
 }: ThemeMarbleProps) {
-  const backgroundImage = THEME_META[theme].marbleBackgroundImage;
-
   return (
     <Box
       as="span"
       aria-hidden="true"
+      data-panda-theme={theme}
       className={cx(
-        marbleBase,
+        marble(),
         css({
           width: `${size}px`,
           height: `${size}px`,
-          backgroundImage,
         }),
         className,
       )}
@@ -35,15 +33,3 @@ export function ThemeMarble({
     />
   );
 }
-
-const marbleBase = css({
-  display: "inline-block",
-  flexShrink: 0,
-  borderRadius: "full",
-  borderWidth: "1px",
-  borderColor: "border",
-  overflow: "hidden",
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat",
-  boxShadow: "inset 0 0 0 1px {colors.gray.a3}",
-});
