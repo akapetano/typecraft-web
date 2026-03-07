@@ -8,7 +8,9 @@ import { jade } from "@/theme/colors/jade";
 import { lime } from "@/theme/colors/lime";
 import { mint } from "@/theme/colors/mint";
 import { orange } from "@/theme/colors/orange";
+import { pink } from "@/theme/colors/pink";
 import { red } from "@/theme/colors/red";
+import { ruby } from "@/theme/colors/ruby";
 import { sky } from "@/theme/colors/sky";
 import { teal } from "@/theme/colors/teal";
 import { tomato } from "@/theme/colors/tomato";
@@ -90,6 +92,8 @@ export const parkUiCompatPalettes = {
   teal,
   tomato,
   crimson,
+  ruby,
+  pink,
 } as const;
 
 export const coreAppSharedSemantics = {
