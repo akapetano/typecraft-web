@@ -8,6 +8,7 @@ import {
   coreAppSharedSemantics,
   parkUiCompatPalettes,
 } from "@/theme/themes/coreSemantics";
+import { oceanColorOverrides } from "@/theme/themes/ocean/tokens/colors";
 
 const oceanSemantic = defineAppTheme({
   semanticTokens: {
@@ -19,6 +20,7 @@ const oceanSemantic = defineAppTheme({
       },
       gray: NEUTRAL_PALETTES.slate,
       ...coreAppSemanticColors,
+      ...oceanColorOverrides,
       ...parkUiCompatPalettes,
     },
     ...coreAppSharedSemantics,
