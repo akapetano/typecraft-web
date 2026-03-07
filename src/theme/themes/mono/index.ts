@@ -5,6 +5,7 @@ import {
   coreAppSharedSemantics,
   parkUiCompatPalettes,
 } from "@/theme/themes/coreSemantics";
+import { monoSharedTokens } from "@/theme/themes/mono/tokens";
 
 const monoSemantic = defineAppTheme({
   semanticTokens: {
@@ -16,9 +17,17 @@ const monoSemantic = defineAppTheme({
       },
       gray: NEUTRAL_PALETTES.neutral,
       ...coreAppSemanticColors,
+      typing: {
+        ...coreAppSemanticColors.typing,
+        current: {
+          bg: { value: "{colors.gray.a3}" },
+          underline: { value: "{colors.gray.9}" },
+        },
+      },
       ...parkUiCompatPalettes,
     },
     ...coreAppSharedSemantics,
+    ...monoSharedTokens,
   },
 });
 
