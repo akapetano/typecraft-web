@@ -1,4 +1,5 @@
 import { amber } from "@/theme/colors/amber";
+import { cyan } from "@/theme/colors/cyan";
 import { grass } from "@/theme/colors/grass";
 import { green } from "@/theme/colors/green";
 import { iris } from "@/theme/colors/iris";
@@ -8,6 +9,7 @@ import { mint } from "@/theme/colors/mint";
 import { orange } from "@/theme/colors/orange";
 import { red } from "@/theme/colors/red";
 import { sky } from "@/theme/colors/sky";
+import { teal } from "@/theme/colors/teal";
 import { violet } from "@/theme/colors/violet";
 import { radii } from "@/theme/tokens/radii";
 import { shadows } from "@/theme/tokens/shadows";
@@ -82,6 +84,8 @@ export const parkUiCompatPalettes = {
   jade,
   grass,
   lime,
+  cyan,
+  teal,
 } as const;
 
 export const coreAppSharedSemantics = {
