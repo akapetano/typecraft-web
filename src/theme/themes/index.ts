@@ -1,4 +1,5 @@
 import { auroraTheme } from "@/theme/themes/aurora";
+import { emberTheme } from "@/theme/themes/ember";
 import { forestTheme } from "@/theme/themes/forest";
 import { monoTheme } from "@/theme/themes/mono";
 import { oceanTheme } from "@/theme/themes/ocean";
@@ -9,6 +10,7 @@ export const APP_THEMES = {
   mono: monoTheme,
   forest: forestTheme,
   ocean: oceanTheme,
+  ember: emberTheme,
 } as const;
 
 export const THEME_NAMES = [...THEMES];

@@ -10,6 +10,7 @@ export const THEME_META: Record<Theme, ThemeMeta> = {
   mono: { value: "mono", label: "Mono" },
   forest: { value: "forest", label: "Forest" },
   ocean: { value: "ocean", label: "Ocean" },
+  ember: { value: "ember", label: "Ember" },
 };
 
 export const THEME_OPTIONS = Object.values(THEME_META);
