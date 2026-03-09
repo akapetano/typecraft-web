@@ -22,14 +22,19 @@ alwaysApply: true
 - `pnpm format` – Biome format
 - `pnpm fix` – Biome check --write
 - `pnpm test` / `pnpm test:run` / `pnpm test:coverage` – Vitest
-- `pnpm prepare` – husky + `panda codegen` (run after clone / dependency changes)
+- `pnpm prepare` – husky + `panda codegen` (run after clone / dependency
+  changes)
 
 ## Folder structure
 
 - `src/app/` – Next.js App Router (layout, page, routes)
 - `src/components/` – core → shared → features
-- `src/theme/` – Panda config (recipes, tokens, conditions, keyframes, colors)
-- `src/hooks/`, `src/utils/`, `src/constants/`, `src/types/` – shared logic and types
+- `src/theme/` – Panda theme system (recipes, colors, semantic tokens, themes,
+  conditions, keyframes)
+- `docs/design-system/` – Design system documentation (semantic token contract,
+  theme rules, migration guidelines)
+- `src/hooks/`, `src/utils/`, `src/constants/`, `src/types/` – shared logic and
+  types
 - `src/__tests__/integration/` – integration tests
 - `src/tests/vitest.setup.ts` – Vitest globals and mocks (e.g. Ark UI)
 
@@ -38,4 +43,10 @@ alwaysApply: true
 - Use **Biome** for formatting and linting; do not introduce ESLint/Prettier.
 - Use **Panda** for all styling; do not add Tailwind or arbitrary CSS-in-JS.
 - Use the **`@/`** path alias for imports under `src/`.
-- New recipes/tokens must be registered in `panda.config.ts` and, for recipes, in `src/theme/recipes/index.ts`.
+- Theme palettes live in `src/theme/colors/*` and semantic theme mappings live
+  in `src/theme/themes/*`.
+- Components and recipes must rely on semantic tokens (`fg.default`,
+  `bg.default`, `border`, `accent.*`, `success`, `warning`, `error`, `typing.*`)
+  instead of raw palette tokens.
+- New recipes must be registered in `src/theme/recipes/index.ts` and Panda
+  codegen should be run when theme or recipe definitions change.
