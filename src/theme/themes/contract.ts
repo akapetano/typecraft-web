@@ -1,5 +1,19 @@
 import { defineThemeContract } from "@pandacss/dev";
 
+/**
+ * App Theme Contract
+ *
+ * Defines the semantic token interface that all themes must implement.
+ *
+ * Components must consume semantic roles (fg, bg, accent, typing, etc.)
+ * instead of referencing palette tokens directly.
+ *
+ * Themes map palette tokens into these roles.
+ *
+ * Documentation:
+ * docs/design-system/theme-contract.md
+ */
+
 export const defineAppTheme = defineThemeContract({
   semanticTokens: {
     colors: {
