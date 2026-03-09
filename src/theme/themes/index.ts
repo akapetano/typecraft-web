@@ -2,6 +2,7 @@ import { auroraTheme } from "@/theme/themes/aurora";
 import { duskTheme } from "@/theme/themes/dusk/dusk";
 import { emberTheme } from "@/theme/themes/ember";
 import { forestTheme } from "@/theme/themes/forest";
+import { koiTheme } from "@/theme/themes/koi";
 import { monoTheme } from "@/theme/themes/mono";
 import { neonTheme } from "@/theme/themes/neon";
 import { oceanTheme } from "@/theme/themes/ocean";
@@ -30,6 +31,7 @@ const THEME_ENTRIES: [Theme, AppThemeConfig][] = [
   ["neon", neonTheme],
   ["vintage", vintageTheme],
   ["sakura", sakuraTheme],
+  ["koi", koiTheme],
 ];
 
 export const APP_THEMES = Object.fromEntries(THEME_ENTRIES) as Record<
