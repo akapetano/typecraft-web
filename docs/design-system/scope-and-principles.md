@@ -8,9 +8,11 @@ Typecraft.
 It includes:
 
 - Semantic token taxonomy (surfaces, text, borders, states)
-- Named theme architecture (data-theme)
+- Named theme architecture (`data-theme`)
 - Accent roles and neutral pairings
+- Semantic elevation (shadows) and shape language (radii)
 - Theme switching and persistence
+- Theme preview gradients (marble tokens)
 - Motion guidelines (premium SaaS)
 - Accessibility guidelines for color + motion
 - (Later) shader integration parameters
@@ -26,7 +28,8 @@ It includes:
 ## Principles
 
 1. **Semantic contract first**: UI uses semantic roles, not raw palette tokens.
-2. **Themes map roles**: themes only provide mappings, not component overrides.
+2. **Themes map roles**: themes provide palette → semantic mappings and must not
+   override component styling.
 3. **Minimal v1**: start with 3 accent roles + neutral pairing.
 4. **Premium SaaS aesthetic**: subtle, restrained, calm motion.
 5. **Accessibility is non-negotiable**: contrast + reduced motion support.
