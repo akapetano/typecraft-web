@@ -6,8 +6,21 @@ alwaysApply: false
 
 # Theme (Panda)
 
-- **Recipes**: Define in `src/theme/recipes/*.ts` with `defineRecipe` or `defineSlotRecipe`. Export from `src/theme/recipes/index.ts` and list in `panda.config.ts` under `theme.extend.recipes` / `slotRecipes`. Set **jsx** to the component names that use the recipe.
-- **Tokens**: Add to `src/theme/tokens/*` or semantic tokens in `panda.config.ts` (e.g. `semanticTokens.colors`). Use existing semantic tokens (`fg`, `bg`, `brand`, `success`, `error`, etc.) in recipes when possible.
-- **Conditions**: Extend in `src/theme/conditions.ts` (e.g. `_light`, `_dark`, `_hover`). Reference in theme with `_condition` or in recipes.
-- **Colors**: Palette modules live in `src/theme/colors/*`; wire them in `panda.config.ts` semanticTokens.
-- After changing recipes, tokens, or conditions, run **`panda codegen`** (or `pnpm prepare`) so `styled-system` is updated.
+- **Recipes**: Define in `src/theme/recipes/*.ts` with `defineRecipe` or
+  `defineSlotRecipe`. Export from `src/theme/recipes/index.ts` and list in
+  `panda.config.ts` under `theme.extend.recipes` / `slotRecipes`. Set **jsx** to
+  the component names that use the recipe.
+- **Tokens**: Add palette tokens in `src/theme/colors/*`. Define the semantic
+  token contract in `src/theme/themes/contract.ts` and theme mappings in
+  `src/theme/themes/*`. Components and recipes should rely on semantic roles
+  such as `fg.default`, `fg.muted`, `fg.subtle`, `bg.default`, `border`,
+  `accent.primary`, `accent.secondary`, `accent.tertiary`, `success`, `warning`,
+  `error`, and `typing.*` instead of raw palette tokens. See
+  `docs/design-system/theme-contract.md` for the full contract.
+- **Conditions**: Extend in `src/theme/conditions.ts` (e.g. `_light`, `_dark`,
+  `_hover`). Reference in theme with `_condition` or in recipes.
+- **Colors**: Raw palette modules live in `src/theme/colors/*`. These palettes
+  are mapped to semantic roles inside theme definitions (`src/theme/themes/*`).
+  Components and recipes must not reference palette tokens directly.
+- After changing recipes, tokens, or conditions, run **`panda codegen`** (or
+  `pnpm prepare`) so `styled-system` is updated.
