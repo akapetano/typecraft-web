@@ -8,21 +8,41 @@ alwaysApply: false
 
 ## Imports
 
-- **Recipes** (from theme): `import { button } from "styled-system/recipes"` (and variant types, e.g. `ButtonVariantProps`).
-- **Styled primitives**: `import { styled, Box, Flex, Grid } from "styled-system/jsx"`.
-- **Component-local styles (cva)**: `import { cva } from "styled-system/css"`; use in `*.styles.ts` next to the component.
-- **Types**: `import type { StyledComponent, HTMLStyledProps } from "styled-system/..."` when needed (e.g. polymorphic `Heading`).
+- **Recipes** (from theme): `import { button } from "styled-system/recipes"`
+  (and variant types, e.g. `ButtonVariantProps`).
+- **Styled primitives**:
+  `import { styled, Box, Flex, Grid } from "styled-system/jsx"`.
+- **Component-local styles (cva)**: `import { cva } from "styled-system/css"`;
+  use in `*.styles.ts` next to the component.
+- **Types**:
+  `import type { StyledComponent, HTMLStyledProps } from "styled-system/..."`
+  when needed (e.g. polymorphic `Heading`).
 
 ## Where styles live
 
-- **Global theme recipes** (Button, Input, Heading, Text, Card, Group, etc.): define in `src/theme/recipes/*.ts` with `defineRecipe`, export from `src/theme/recipes/index.ts`, and list in `panda.config.ts` theme.extend. Register **jsx** component names in the recipe (e.g. `jsx: ["Button", "IconButton", "ButtonGroup"]`).
-- **Slot recipes** (compound components like Card): use `defineSlotRecipe`; compose in the component with `createStyleContext(slotRecipe)` and `withProvider` / `withContext`.
-- **Feature- or component-specific variants**: use **cva** in a co-located `ComponentName.styles.ts` and call it from the component (e.g. `characterStyles({ state, punctuation })`).
+- **Global theme recipes** (Button, Input, Heading, Text, Card, Group, etc.):
+  define in `src/theme/recipes/*.ts` with `defineRecipe`, export from
+  `src/theme/recipes/index.ts`, and list in `panda.config.ts` theme.extend.
+  Register **jsx** component names in the recipe (e.g.
+  `jsx: ["Button", "IconButton", "ButtonGroup"]`).
+- **Slot recipes** (compound components like Card): use `defineSlotRecipe`;
+  compose in the component with `createStyleContext(slotRecipe)` and
+  `withProvider` / `withContext`.
+- **Feature- or component-specific variants**: use **cva** in a co-located
+  `ComponentName.styles.ts` and call it from the component (e.g.
+  `characterStyles({ state, punctuation })`).
 
 ## Semantic tokens
 
-- Use semantic tokens for theming: `fg`, `fg.muted`, `bg`, `border`, `brand`, `success`, `error`, etc. (see `panda.config.ts` semanticTokens).
-- Color mode: `_light` / `_dark` in theme; app uses `data-color-mode` (see `src/theme/conditions.ts`).
+- Components must use **semantic tokens**, not raw palette tokens.
+- Prefer tokens such as `fg.default`, `fg.muted`, `fg.subtle`, `bg.default`,
+  `border`, `accent.primary`, `accent.secondary`, `accent.tertiary`, `success`,
+  `warning`, `error`, and `typing.*`.
+- Raw palette tokens (e.g. `colors.mint.9`, `colors.gray.12`, `var(--colors-*)`)
+  should only appear inside **theme definitions**, not inside components.
+- See `docs/design-system/theme-contract.md` and
+  `docs/design-system/migration-rules.md` for the full semantic token contract
+  and migration guidelines.
 
 ## Patterns
 
@@ -41,5 +61,7 @@ export const Heading = styled("h2", heading) as StyledComponent<"h2", Props>;
 export const characterStyles = cva({ base: {...}, variants: { state: {...} } });
 ```
 
-- Do **not** add new global styles outside Panda (no ad-hoc global CSS except what’s in `src/theme/global-css.ts` and `src/app/globals.css`).
-- Run **`panda codegen`** (or `pnpm prepare`) after adding/changing recipes or tokens so `styled-system` is up to date.
+- Do **not** add new global styles outside Panda (no ad-hoc global CSS except
+  what’s in `src/theme/global-css.ts` and `src/app/globals.css`).
+- Run **`panda codegen`** (or `pnpm prepare`) after adding/changing recipes or
+  tokens so `styled-system` is up to date.
