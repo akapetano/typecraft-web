@@ -102,7 +102,7 @@ export const KeyShadow = () => {
       width="68"
       height="70"
       rx="16"
-      fill={token("colors.gray.12")}
+      fill={token("colors.fg.default")}
       opacity="0.15"
     />
   );
