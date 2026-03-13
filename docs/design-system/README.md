@@ -6,8 +6,9 @@ This folder contains documentation for the Typecraft design system.
 
 - Scope & Principles
 - Token Contract
-- Migration Rules
 - Theme Contract
+- Surface and Elevation
+- Migration Rules
 
 ## Key Rule
 
