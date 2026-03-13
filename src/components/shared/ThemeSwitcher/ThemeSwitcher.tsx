@@ -38,6 +38,7 @@ export const ThemeSwitcher = ({ theme: initialTheme }: ThemeSwitcherProps) => {
                     ? "accent.primary.subtle.bg"
                     : "bg.default"
                 }
+                _hover={{ bgColor: "accent.primary.subtle.bg.hover" }}
               >
                 {themeOption.label}
                 <ThemeMarble theme={themeOption.value} />
