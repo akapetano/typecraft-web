@@ -139,9 +139,27 @@ fg.subtle
 bg.default
 ```
 
-Represents the main page background.
+Represents the main page background (base surface).
 
 Themes may override this to create distinct visual atmospheres.
+
+---
+
+# Surface and elevation
+
+Layered surfaces use the **neutral** `gray` structure and **layer styles** so
+elevation is consistent. See `docs/design-system/surface-elevation.md` for the
+full system.
+
+- **Base surface**: `bg.default` (page canvas).
+- **Subtle surface**: `gray.subtle.bg` (low-emphasis containers).
+- **Raised / elevated / overlay**: `gray.surface.bg`, `gray.surface.border`;
+  use layer styles `surfaceSubtle`, `surfaceRaised`, `surfaceElevated`,
+  `surfaceOverlay` instead of ad hoc bg + border + shadow.
+
+Themes provide `gray.surface`, `gray.subtle`, and `gray.outline` via the
+selected neutral palette. Shadows (`shadows.xs` … `shadows.inset`) represent
+elevation and may be overridden per theme.
 
 ---
 
