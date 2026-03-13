@@ -98,6 +98,25 @@ Used for:
 
 ---
 
+## Surface and elevation
+
+Use **layer styles** for containers instead of ad hoc bg + border + shadow:
+
+- `surfaceSubtle` — subtle background only
+- `surfaceRaised` — `gray.surface.bg` + border
+- `surfaceElevated` — `gray.surface.bg` + `shadows.lg`
+- `surfaceOverlay` — `gray.surface.bg` + `shadows.md` (menus, popovers)
+
+Surface tokens (from the neutral `gray` palette):
+
+- `gray.surface.bg`, `gray.surface.border`, `gray.surface.fg`
+- `gray.subtle.bg`, `gray.subtle.fg`
+- `gray.outline.border` (and outline bg/fg where used)
+
+Full semantics and usage: `docs/design-system/surface-elevation.md`.
+
+---
+
 ## Status Colors
 
 Status tokens represent semantic UI states.
