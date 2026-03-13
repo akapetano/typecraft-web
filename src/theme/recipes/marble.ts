@@ -13,6 +13,6 @@ export const marble = defineRecipe({
     bgGradient: "marble",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    boxShadow: "inset 0 0 0 1px var(--colors-gray-a3)",
+    boxShadow: "shadows.inset",
   },
 });
