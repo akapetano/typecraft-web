@@ -10,6 +10,7 @@ import { textStyles } from "@/theme/text-styles";
 import { THEME_NAMES, themes } from "@/theme/themes/index";
 import { colors } from "@/theme/tokens/colors";
 import { durations } from "@/theme/tokens/durations";
+import { easings } from "@/theme/tokens/easings";
 import { zIndex } from "@/theme/tokens/z-index";
 
 export default defineConfig({
@@ -43,6 +44,7 @@ export default defineConfig({
         durations,
         zIndex,
         fonts,
+        easings,
       },
     },
   },
