@@ -1,4 +1,5 @@
 import { amber } from "@/theme/colors/amber";
+import { bronze } from "@/theme/colors/bronze";
 import { brown } from "@/theme/colors/brown";
 import { crimson } from "@/theme/colors/crimson";
 import { cyan } from "@/theme/colors/cyan";
@@ -20,9 +21,9 @@ import { sky } from "@/theme/colors/sky";
 import { teal } from "@/theme/colors/teal";
 import { tomato } from "@/theme/colors/tomato";
 import { violet } from "@/theme/colors/violet";
-import { radii } from "@/theme/tokens/radii";
-import { shadows } from "@/theme/tokens/shadows";
-import { bronze } from "../colors/bronze";
+import { easings } from "@/theme/semanticTokens/easings";
+import { radii } from "@/theme/semanticTokens/radii";
+import { shadows } from "@/theme/semanticTokens/shadows";
 
 export const coreAppSemanticColors = {
   bg: {
@@ -111,4 +112,5 @@ export const parkUiCompatPalettes = {
 export const coreAppSharedSemantics = {
   shadows: shadows,
   radii: radii,
+  easings: easings,
 };

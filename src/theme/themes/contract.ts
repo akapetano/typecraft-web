@@ -64,5 +64,13 @@ export const defineAppTheme = defineThemeContract({
       l2: {},
       l3: {},
     },
+
+    easings: {
+      standard: {},
+      enter: {},
+      exit: {},
+      emphasized: {},
+      snappy: {},
+    },
   },
 });
