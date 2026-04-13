@@ -20,6 +20,9 @@
 # production
 /build
 
+# ai
+draft/
+
 # misc
 .DS_Store
 *.pem
