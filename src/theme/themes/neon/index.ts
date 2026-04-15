@@ -43,8 +43,12 @@ export const neonTheme = {
         `,
       },
       marble: {
-        value:
-          "radial-gradient(circle at 28% 50%, var(--colors-lime-9) 0%, transparent 100%), radial-gradient(circle at 62% 32%, var(--colors-cyan-9) 0%, transparent 100%), radial-gradient(circle at 52% 76%, var(--colors-purple-9) 0%, transparent 100%), linear-gradient(135deg, var(--colors-lime-4), var(--colors-cyan-4), var(--colors-purple-4))",
+        value: `
+          radial-gradient(circle at 28% 50%, var(--colors-lime-9) 0%, transparent 100%),
+          radial-gradient(circle at 62% 32%, var(--colors-cyan-9) 0%, transparent 100%),
+          radial-gradient(circle at 52% 76%, var(--colors-purple-9) 0%, transparent 100%),
+          linear-gradient(135deg, var(--colors-lime-4), var(--colors-cyan-4), var(--colors-purple-4))
+          `,
       },
     },
   },

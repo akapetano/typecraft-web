@@ -41,8 +41,12 @@ export const oceanTheme = {
         `,
       },
       marble: {
-        value:
-          "radial-gradient(circle at 28% 50%, var(--colors-cyan-9) 0%, transparent 100%), radial-gradient(circle at 62% 32%, var(--colors-teal-9) 0%, transparent 100%), radial-gradient(circle at 52% 76%, var(--colors-sky-9) 0%, transparent 100%), linear-gradient(135deg, var(--colors-cyan-4), var(--colors-teal-4), var(--colors-sky-4))",
+        value: `
+          radial-gradient(circle at 28% 50%, var(--colors-cyan-9) 0%, transparent 100%),
+          radial-gradient(circle at 62% 32%, var(--colors-teal-9) 0%, transparent 100%),
+          radial-gradient(circle at 52% 76%, var(--colors-sky-9) 0%, transparent 100%),
+          linear-gradient(135deg, var(--colors-cyan-4), var(--colors-teal-4), var(--colors-sky-4))
+          `,
       },
     },
   },

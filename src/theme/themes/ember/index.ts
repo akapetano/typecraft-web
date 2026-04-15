@@ -41,8 +41,12 @@ export const emberTheme = {
           `,
       },
       marble: {
-        value:
-          "radial-gradient(circle at 28% 50%, var(--colors-tomato-9) 0%, transparent 100%), radial-gradient(circle at 62% 32%, var(--colors-crimson-9) 0%, transparent 100%), radial-gradient(circle at 52% 76%, var(--colors-amber-9) 0%, transparent 100%), linear-gradient(135deg, var(--colors-tomato-4), var(--colors-crimson-4), var(--colors-amber-4))",
+        value: `
+          radial-gradient(circle at 28% 50%, var(--colors-tomato-9) 0%, transparent 100%),
+          radial-gradient(circle at 62% 32%, var(--colors-crimson-9) 0%, transparent 100%),
+          radial-gradient(circle at 52% 76%, var(--colors-amber-9) 0%, transparent 100%),
+          linear-gradient(135deg, var(--colors-tomato-4), var(--colors-crimson-4), var(--colors-amber-4))
+          `,
       },
     },
   },
