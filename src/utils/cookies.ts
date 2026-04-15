@@ -23,5 +23,6 @@ export function setCookie(
   const expires = new Date();
   expires.setTime(expires.getTime() + time);
 
+  // biome-ignore lint/suspicious/noDocumentCookie: Cookie Store API lacks sufficient browser support
   document.cookie = `${name}=${value}; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
 }
