@@ -1,6 +1,7 @@
 // LucideIcon.test.tsx
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import type { IconName } from "./LucideIcon";
 import { LucideIcon } from "./LucideIcon";
 
 describe("LucideIcon", () => {
@@ -33,7 +34,9 @@ describe("LucideIcon", () => {
 
   describe("Invalid Icons", () => {
     it("returns null for invalid icon name", () => {
-      const { container } = render(<LucideIcon name={"InvalidIcon" as any} />);
+      const { container } = render(
+        <LucideIcon name={"InvalidIcon" as unknown as IconName} />,
+      );
       expect(container.firstChild).toBeNull();
     });
 
@@ -43,7 +46,7 @@ describe("LucideIcon", () => {
         .spyOn(console, "error")
         .mockImplementation(() => {});
 
-      render(<LucideIcon name={"FakeIcon" as any} />);
+      render(<LucideIcon name={"FakeIcon" as unknown as IconName} />);
 
       expect(consoleSpy).toHaveBeenCalledWith(
         expect.stringContaining('Icon "FakeIcon" not found'),
@@ -59,7 +62,7 @@ describe("LucideIcon", () => {
         .spyOn(console, "error")
         .mockImplementation(() => {});
 
-      render(<LucideIcon name={"FakeIcon" as any} />);
+      render(<LucideIcon name={"FakeIcon" as unknown as IconName} />);
 
       expect(consoleSpy).not.toHaveBeenCalled();
 
