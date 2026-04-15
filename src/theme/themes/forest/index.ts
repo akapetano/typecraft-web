@@ -31,6 +31,15 @@ export const forestTheme = {
   ...forestSemantic,
   tokens: {
     gradients: {
+      shader: {
+        value: `
+          linear-gradient(180deg, var(--colors-gray-a2), transparent 25%),
+          radial-gradient(circle at 20% 20%, var(--colors-jade-a3), transparent 60%),
+          radial-gradient(circle at 80% 15%, var(--colors-grass-a3), transparent 65%),
+          radial-gradient(circle at 50% 80%, var(--colors-lime-a3), transparent 60%),
+          linear-gradient(180deg, transparent, var(--colors-lime-a1))
+          `,
+      },
       marble: {
         value:
           "radial-gradient(circle at 28% 50%, var(--colors-jade-9) 0%, transparent 100%), radial-gradient(circle at 62% 32%, var(--colors-grass-9) 0%, transparent 100%), radial-gradient(circle at 52% 76%, var(--colors-lime-9) 0%, transparent 100%), linear-gradient(135deg, var(--colors-jade-4), var(--colors-grass-4), var(--colors-lime-4))",
