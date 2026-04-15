@@ -20,7 +20,13 @@ export const AppLayout = ({
   theme,
 }: AppLayoutProps) => {
   return (
-    <Box minH="100vh" display="flex" flexDirection="column">
+    <Box
+      minH="100vh"
+      display="flex"
+      flexDirection="column"
+      bg="bg.default"
+      bgGradient="shader"
+    >
       {showHeader && <Header colorMode={colorMode} theme={theme} />}
 
       <Box as="main" flex="1" display="flex" flexDirection="column">
