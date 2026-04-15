@@ -41,8 +41,12 @@ export const forestTheme = {
           `,
       },
       marble: {
-        value:
-          "radial-gradient(circle at 28% 50%, var(--colors-jade-9) 0%, transparent 100%), radial-gradient(circle at 62% 32%, var(--colors-grass-9) 0%, transparent 100%), radial-gradient(circle at 52% 76%, var(--colors-lime-9) 0%, transparent 100%), linear-gradient(135deg, var(--colors-jade-4), var(--colors-grass-4), var(--colors-lime-4))",
+        value: `
+          radial-gradient(circle at 28% 50%, var(--colors-jade-9) 0%, transparent 100%),
+          radial-gradient(circle at 62% 32%, var(--colors-grass-9) 0%, transparent 100%),
+          radial-gradient(circle at 52% 76%, var(--colors-lime-9) 0%, transparent 100%),
+          linear-gradient(135deg, var(--colors-jade-4), var(--colors-grass-4), var(--colors-lime-4))
+          `,
       },
     },
   },

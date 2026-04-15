@@ -43,8 +43,12 @@ export const vintageTheme = {
         `,
       },
       marble: {
-        value:
-          "radial-gradient(circle at 28% 50%, var(--colors-brown-9), transparent), radial-gradient(circle at 62% 32%, var(--colors-amber-9), transparent), radial-gradient(circle at 52% 76%, var(--colors-bronze-9), transparent), linear-gradient(135deg, var(--colors-brown-4), var(--colors-amber-4), var(--colors-bronze-4))",
+        value: `
+          radial-gradient(circle at 28% 50%, var(--colors-brown-9), transparent),
+          radial-gradient(circle at 62% 32%, var(--colors-amber-9), transparent),
+          radial-gradient(circle at 52% 76%, var(--colors-bronze-9), transparent),
+          linear-gradient(135deg, var(--colors-brown-4), var(--colors-amber-4), var(--colors-bronze-4))
+          `,
       },
     },
   },
