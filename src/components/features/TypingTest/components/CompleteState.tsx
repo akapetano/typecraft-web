@@ -15,7 +15,7 @@ export function CompleteState({
   onRestart,
 }: CompleteStateProps) {
   return (
-    <Flex bg="bg.default" justifyContent="center" alignItems="center" p="4">
+    <Flex justifyContent="center" alignItems="center" p="4">
       <Box w="full" maxW="2xl">
         <ResultsCard
           wpm={wpm}
