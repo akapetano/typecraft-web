@@ -3,6 +3,7 @@ import {
   Card,
   type RootProps as CardRootProps,
 } from "@/components/core/Card/Card";
+import { interactiveTransition } from "@/theme/motion/transitions";
 
 export function TypingArea({ children, ...props }: CardRootProps) {
   return (
@@ -18,9 +19,9 @@ export function TypingArea({ children, ...props }: CardRootProps) {
         outline: "none",
         boxShadow: `0 0 8px 2px ${token("colors.accent.primary.solid.bg.hover")}`,
       }}
-      transition="colors"
       tabIndex={0}
       backgroundColor="bg.default"
+      css={{ ...interactiveTransition }}
       {...props}
     >
       {children}

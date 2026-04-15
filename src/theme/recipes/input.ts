@@ -1,4 +1,5 @@
 import type { RecipeConfig } from "@pandacss/dev";
+import { interactiveTransition } from "@/theme/motion/transitions";
 import { createInputToneCss } from "@/utils/tone";
 
 const TONES = ["primary", "secondary", "tertiary"] as const;
@@ -24,7 +25,7 @@ export const input = {
     outline: "0",
     position: "relative",
     textAlign: "start",
-    transition: "colors",
+    ...interactiveTransition,
     width: "100%",
     _disabled: {
       layerStyle: "disabled",
