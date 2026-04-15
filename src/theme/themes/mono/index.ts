@@ -35,6 +35,12 @@ export const monoTheme = {
   ...monoSemantic,
   tokens: {
     gradients: {
+      shader: {
+        value: `
+          linear-gradient(180deg, var(--colors-gray-a1), transparent 25%), 
+          linear-gradient(180deg, transparent, var(--colors-gray-a2))
+          `,
+      },
       marble: {
         value:
           "linear-gradient(220deg, var(--colors-gray-12), var(--colors-gray-2))",
