@@ -1,4 +1,5 @@
 import { defineRecipe } from "@pandacss/dev";
+import { interactiveTransition } from "@/theme/motion/transitions";
 import { createButtonToneCss } from "@/utils/tone";
 
 const TONES = ["primary", "secondary", "tertiary"] as const;
@@ -28,8 +29,7 @@ export const button = defineRecipe({
     justifyContent: "center",
     outline: "0",
     position: "relative",
-    transition: "colors",
-    transitionProperty: "background-color, border-color, color, box-shadow",
+    ...interactiveTransition,
     userSelect: "none",
     verticalAlign: "middle",
     whiteSpace: "nowrap",

@@ -1,12 +1,12 @@
 import { cva } from "styled-system/css";
+import { textTransition } from "@/theme/motion/transitions";
 
 export const characterStyles = cva({
   base: {
     fontSize: "3xl",
     fontFamily: "code",
-    transitionProperty: "color, background-color, text-decoration-color",
-    transitionDuration: "faster",
     borderRadius: "l2",
+    ...textTransition,
   },
   variants: {
     state: {
