@@ -31,6 +31,15 @@ export const emberTheme = {
   ...emberSemantic,
   tokens: {
     gradients: {
+      shader: {
+        value: `
+          linear-gradient(180deg, var(--colors-gray-a2), transparent 25%),
+          radial-gradient(circle at 20% 20%, var(--colors-tomato-a3), transparent 60%),
+          radial-gradient(circle at 80% 15%, var(--colors-crimson-a3), transparent 65%),
+          radial-gradient(circle at 50% 80%, var(--colors-amber-a3), transparent 60%),
+          linear-gradient(180deg, transparent, var(--colors-amber-a1))
+          `,
+      },
       marble: {
         value:
           "radial-gradient(circle at 28% 50%, var(--colors-tomato-9) 0%, transparent 100%), radial-gradient(circle at 62% 32%, var(--colors-crimson-9) 0%, transparent 100%), radial-gradient(circle at 52% 76%, var(--colors-amber-9) 0%, transparent 100%), linear-gradient(135deg, var(--colors-tomato-4), var(--colors-crimson-4), var(--colors-amber-4))",
