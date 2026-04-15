@@ -5,6 +5,7 @@ import { Heading } from "@/components/core/Heading/Heading";
 import { Icon } from "@/components/core/Icon/Icon";
 import { LucideIcon } from "@/components/core/LucideIcon/LucideIcon";
 import { Span } from "@/components/core/Span/Span";
+import { interactiveTransition } from "@/theme/motion/transitions";
 
 export interface ResultsCardProps {
   wpm: number;
@@ -23,7 +24,7 @@ export function ResultsCard({
     <Card.Root
       variant="elevated"
       _hover={{ borderColor: "accent.primary.solid.bg.hover" }}
-      transition="colors"
+      css={{ ...interactiveTransition }}
     >
       <Card.Body p="8" textAlign="center">
         <Heading as="h3" fontSize="2xl" color="fg.default" mb="6">
