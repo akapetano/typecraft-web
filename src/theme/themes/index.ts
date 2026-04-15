@@ -1,5 +1,5 @@
 import { auroraTheme } from "@/theme/themes/aurora";
-import { duskTheme } from "@/theme/themes/dusk/dusk";
+import { duskTheme } from "@/theme/themes/dusk";
 import { emberTheme } from "@/theme/themes/ember";
 import { forestTheme } from "@/theme/themes/forest";
 import { koiTheme } from "@/theme/themes/koi";
