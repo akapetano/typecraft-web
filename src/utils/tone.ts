@@ -1,12 +1,8 @@
-import type {
-  ButtonVariantProps,
-  InputVariantProps,
-} from "styled-system/recipes";
+import type { ButtonVariant } from "@/types/components/button";
+import type { InputVariant } from "@/types/components/input";
 import type { Tone } from "@/types/theme/tone";
 
 export const toneToAccentPath = (tone: Tone) => `accent.${tone}` as const;
-
-type ButtonVariant = NonNullable<ButtonVariantProps["variant"]>;
 
 export const createButtonToneCss = (tone: Tone, variant: ButtonVariant) => {
   const base = toneToAccentPath(tone);
@@ -58,8 +54,6 @@ export const createButtonToneCss = (tone: Tone, variant: ButtonVariant) => {
       };
   }
 };
-
-type InputVariant = NonNullable<InputVariantProps["variant"]>;
 
 export const createInputToneCss = (tone: Tone, variant: InputVariant) => {
   const base = toneToAccentPath(tone);
