@@ -42,8 +42,12 @@ export const sakuraTheme = {
         `,
       },
       marble: {
-        value:
-          "radial-gradient(circle at 28% 50%, var(--colors-pink-9), transparent), radial-gradient(circle at 62% 32%, var(--colors-plum-9), transparent), radial-gradient(circle at 52% 76%, var(--colors-gold-9), transparent), linear-gradient(135deg, var(--colors-pink-4), var(--colors-plum-4), var(--colors-gold-4))",
+        value: `
+          radial-gradient(circle at 28% 50%, var(--colors-pink-9), transparent),
+          radial-gradient(circle at 62% 32%, var(--colors-plum-9), transparent),
+          radial-gradient(circle at 52% 76%, var(--colors-gold-9), transparent),
+          linear-gradient(135deg, var(--colors-pink-4), var(--colors-plum-4), var(--colors-gold-4))
+          `,
       },
     },
   },

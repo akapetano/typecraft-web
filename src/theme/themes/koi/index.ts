@@ -41,8 +41,12 @@ export const koiTheme = {
           `,
       },
       marble: {
-        value:
-          "radial-gradient(circle at 28% 50%, var(--colors-orange-9), transparent), radial-gradient(circle at 62% 32%, var(--colors-red-9), transparent), radial-gradient(circle at 52% 76%, var(--colors-cyan-9), transparent), linear-gradient(135deg, var(--colors-orange-4), var(--colors-red-4), var(--colors-cyan-4))",
+        value: `
+          radial-gradient(circle at 28% 50%, var(--colors-orange-9), transparent),
+          radial-gradient(circle at 62% 32%, var(--colors-red-9), transparent),
+          radial-gradient(circle at 52% 76%, var(--colors-cyan-9), transparent),
+          linear-gradient(135deg, var(--colors-orange-4), var(--colors-red-4), var(--colors-cyan-4))
+          `,
       },
     },
   },
