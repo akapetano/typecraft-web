@@ -7,7 +7,6 @@ interface RootProps extends FlexProps {
 export function Root({ children, ...props }: RootProps) {
   return (
     <Flex
-      bg="bg.default"
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
