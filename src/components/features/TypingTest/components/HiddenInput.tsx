@@ -5,6 +5,7 @@ export function HiddenInput(props: InputProps) {
     <Input
       type="text"
       autoFocus
+      tabIndex={-1}
       autoComplete="off"
       autoCapitalize="off"
       autoCorrect="off"
