@@ -1,6 +1,7 @@
 import { Box } from "styled-system/jsx";
 import { Footer } from "@/components/shared/Footer/Footer";
 import { Header } from "@/components/shared/Header/Header";
+import { ShaderBackground } from "@/components/shared/ShaderBackground/ShaderBackground";
 import type { ColorMode } from "@/types/theme/colorMode";
 import type { Theme } from "@/types/theme/theme";
 
@@ -20,13 +21,7 @@ export const AppLayout = ({
   theme,
 }: AppLayoutProps) => {
   return (
-    <Box
-      minH="100vh"
-      display="flex"
-      flexDirection="column"
-      bg="bg.default"
-      bgGradient="shader"
-    >
+    <ShaderBackground>
       {showHeader && <Header colorMode={colorMode} theme={theme} />}
 
       <Box as="main" flex="1" display="flex" flexDirection="column">
@@ -34,6 +29,6 @@ export const AppLayout = ({
       </Box>
 
       {showFooter && <Footer />}
-    </Box>
+    </ShaderBackground>
   );
 };
