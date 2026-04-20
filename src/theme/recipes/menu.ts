@@ -39,6 +39,9 @@ export const menu = defineSlotRecipe({
       _highlighted: {
         bg: "gray.surface.bg.hover",
       },
+      _focusVisible: {
+        focusVisibleRing: "outside",
+      },
       _disabled: {
         layerStyle: "disabled",
       },
