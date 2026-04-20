@@ -22,5 +22,14 @@ alwaysApply: false
 - **Colors**: Raw palette modules live in `src/theme/colors/*`. These palettes
   are mapped to semantic roles inside theme definitions (`src/theme/themes/*`).
   Components and recipes must not reference palette tokens directly.
+- **Gradient tokens**: Each theme defines two gradient tokens.
+  - `shader` — full-viewport ambient background; applied only via
+    `ShaderBackground` at layout level. Uses alpha-channel palette tokens
+    (`a1`–`a3`). Do not apply `bgGradient: "shader"` to individual components.
+  - `marble` — compact theme-preview swatch; applied via the `ThemeMarble`
+    component. Uses opaque palette scale steps (`9`).
+  Raw CSS variable names (`var(--colors-mint-a3)`) are required inside gradient
+  strings because Panda semantic tokens cannot be resolved in CSS gradient values.
+  See `docs/design-system/shader-system.md` for the full shader system reference.
 - After changing recipes, tokens, or conditions, run **`panda codegen`** (or
   `pnpm prepare`) so `styled-system` is updated.
