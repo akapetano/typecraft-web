@@ -21,6 +21,7 @@ High-level guide for AI agents. Detailed conventions live in **`.cursor/rules/`*
 
 - Edit recipes/tokens in `src/theme/` and wire them in `panda.config.ts` and `src/theme/recipes/index.ts`.
 - Run `panda codegen` (or `pnpm prepare`) after changes.
+- When adding or modifying a theme's `shader` gradient token, follow the guidelines in `docs/design-system/shader-system.md`. Shaders must only be applied via `ShaderBackground` at layout level.
 - Rule: `.cursor/rules/theme.mdc`, `.cursor/rules/panda-styling.mdc`.
 
 ## App Router (routes, layout, metadata)

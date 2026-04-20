@@ -8,6 +8,7 @@ This folder contains documentation for the Typecraft design system.
 - Token Contract
 - Theme Contract
 - Surface and Elevation
+- Shader System
 - Migration Rules
 
 ## Key Rule
