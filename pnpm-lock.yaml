@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@ark-ui/react':
         specifier: ^5.30.0
-        version: 5.36.1(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        version: 5.36.2(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       lucide-react:
         specifier: ^1.7.0
         version: 1.11.0(react@19.2.5)
@@ -93,8 +93,8 @@ packages:
   '@adobe/css-tools@4.4.4':
     resolution: {integrity: sha512-Elp+iwUx5rN5+Y8xLt5/GRoG20WGoDCQ/1Fb+1LiGtvwbDavuSk0jhD/eZdckHAuzcDzccnkv+rEjyWfRx18gg==}
 
-  '@ark-ui/react@5.36.1':
-    resolution: {integrity: sha512-nGicHRBnQcKlUcBMZXJC+j0CdfoXgEHV7+aerLghgYp7FIb7bHNTzYsy5+2nnybayq0fuKNRRhjckdrbzxPElg==}
+  '@ark-ui/react@5.36.2':
+    resolution: {integrity: sha512-2lrZ7+Qtlj7hGx4qU2jZkE892JNrkULg/fUxqUuqmQfv9UGAXhdcw1Hr3N+zBgMDVz3aqip0Qa4v0Mox09MMvg==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -3130,7 +3130,7 @@ snapshots:
 
   '@adobe/css-tools@4.4.4': {}
 
-  '@ark-ui/react@5.36.1(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
+  '@ark-ui/react@5.36.2(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
     dependencies:
       '@internationalized/date': 3.12.0
       '@zag-js/accordion': 1.40.0
