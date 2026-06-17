@@ -4,6 +4,7 @@ export function HiddenInput(props: InputProps) {
   return (
     <Input
       type="text"
+      aria-label="Typing input"
       autoFocus
       tabIndex={-1}
       autoComplete="off"
