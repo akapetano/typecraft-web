@@ -1,7 +1,10 @@
 import { act, renderHook } from "@testing-library/react";
 import type React from "react";
-import { describe, expect, it, vi } from "vitest";
-import { useTypingTest } from "@/components/features/TypingTest/TypingTest.hooks";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import {
+  useFocusLock,
+  useTypingTest,
+} from "@/components/features/TypingTest/TypingTest.hooks";
 
 // Mock the sample texts for predictable testing
 vi.mock("@/components/features/TypingTest/TypingTest.data", () => ({
@@ -259,5 +262,144 @@ describe("useTypingTest - Lifecycle", () => {
 
     expect(result.current.typedText).toBe("");
     expect(result.current.isComplete).toBe(false);
+  });
+});
+
+describe("useFocusLock", () => {
+  afterEach(() => {
+    document.body.innerHTML = "";
+    vi.restoreAllMocks();
+  });
+
+  function setup(
+    overrides: { enabled?: boolean; insertChar?: (char: string) => void } = {},
+  ) {
+    const input = document.createElement("input");
+    document.body.appendChild(input);
+    const insertChar = overrides.insertChar ?? vi.fn();
+    const inputRef = { current: input };
+
+    const view = renderHook(() =>
+      useFocusLock({
+        inputRef,
+        enabled: overrides.enabled ?? true,
+        insertChar,
+      }),
+    );
+
+    return { input, insertChar, inputRef, ...view };
+  }
+
+  it("recovers focus and registers a printable key pressed while unfocused", () => {
+    const { input, insertChar } = setup();
+    const focusSpy = vi.spyOn(input, "focus");
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "a" }));
+    });
+
+    expect(focusSpy).toHaveBeenCalledWith({ preventScroll: true });
+    expect(insertChar).toHaveBeenCalledWith("a");
+  });
+
+  it("ignores keys with modifiers or non-printable keys", () => {
+    const { insertChar } = setup();
+
+    act(() => {
+      document.dispatchEvent(
+        new KeyboardEvent("keydown", { key: "a", ctrlKey: true }),
+      );
+      document.dispatchEvent(
+        new KeyboardEvent("keydown", { key: "v", metaKey: true }),
+      );
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Shift" }));
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter" }));
+    });
+
+    expect(insertChar).not.toHaveBeenCalled();
+  });
+
+  it("does not double-register when the input is already focused", () => {
+    const { input, insertChar } = setup();
+    input.focus();
+    expect(document.activeElement).toBe(input);
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "a" }));
+    });
+
+    expect(insertChar).not.toHaveBeenCalled();
+  });
+
+  it("releases focus on Escape so the user can Tab to controls", () => {
+    const { input } = setup();
+    const blurSpy = vi.spyOn(input, "blur");
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
+    });
+
+    expect(blurSpy).toHaveBeenCalled();
+  });
+
+  it("recovers focus on click in a non-interactive area", () => {
+    const { input } = setup();
+    const focusSpy = vi.spyOn(input, "focus");
+
+    const area = document.createElement("div");
+    document.body.appendChild(area);
+
+    act(() => {
+      area.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+    expect(focusSpy).toHaveBeenCalledWith({ preventScroll: true });
+  });
+
+  it("does not recover focus when clicking an interactive or exempt control", () => {
+    const { input } = setup();
+    const focusSpy = vi.spyOn(input, "focus");
+
+    const button = document.createElement("button");
+    const exempt = document.createElement("div");
+    exempt.setAttribute("data-focus-exempt", "");
+    document.body.append(button, exempt);
+
+    act(() => {
+      button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      exempt.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+    expect(focusSpy).not.toHaveBeenCalled();
+  });
+
+  it("does nothing while disabled", () => {
+    const { input, insertChar } = setup({ enabled: false });
+    const focusSpy = vi.spyOn(input, "focus");
+
+    const area = document.createElement("div");
+    document.body.appendChild(area);
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "a" }));
+      area.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+    expect(insertChar).not.toHaveBeenCalled();
+    expect(focusSpy).not.toHaveBeenCalled();
+  });
+
+  it("removes listeners on unmount", () => {
+    const { input, insertChar, unmount } = setup();
+    const focusSpy = vi.spyOn(input, "focus");
+
+    unmount();
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "a" }));
+    });
+
+    expect(insertChar).not.toHaveBeenCalled();
+    expect(focusSpy).not.toHaveBeenCalled();
   });
 });

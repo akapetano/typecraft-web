@@ -71,6 +71,98 @@ export function useTypingStats(
   return { correctChars, accuracy, wpm };
 }
 
+/**
+ * Selector for elements that represent *intentional* interaction. A click
+ * inside any of these must NOT steal focus back to the typing input
+ * (e.g. Restart, a future Pause / Settings control, or an open dialog).
+ *
+ * To opt a future control out of focus recovery, add `data-focus-exempt` to it.
+ */
+const FOCUS_EXEMPT_SELECTOR =
+  'button, a[href], input, textarea, select, [role="button"], [role="menuitem"], [role="dialog"], [data-focus-exempt]';
+
+export interface UseFocusLockArgs {
+  inputRef: React.RefObject<HTMLInputElement | null>;
+  /** Whether focus recovery is active (typing test mounted and not complete). */
+  enabled: boolean;
+  /** Register a character that arrived while the input was not focused. */
+  insertChar: (char: string) => void;
+}
+
+/**
+ * Keeps focus on the hidden typing input while a test is active, without
+ * trapping the user or fighting screen readers (WCAG 2.1.2):
+ *
+ * - A click on a non-interactive area recovers focus; clicks on interactive /
+ *   `data-focus-exempt` elements are treated as intentional. We listen on
+ *   `click` (not `pointerdown`) so the browser's native focus shift to the
+ *   clicked element has already settled — refocusing on pointerdown loses that
+ *   race — and so we never `preventDefault` a pointer event (which would block
+ *   touch scrolling on mobile).
+ * - A printable keypress while the input is unfocused recovers focus AND
+ *   registers the character (it is not lost).
+ * - `Escape` releases focus so the user can Tab to controls.
+ * - There is deliberately no `blur` handler — focus is never force-restored on
+ *   blur, so the screen-reader virtual cursor and Tab-away keep working.
+ *
+ * Window/tab focus loss is intentionally out of scope (handled separately).
+ */
+export function useFocusLock({
+  inputRef,
+  enabled,
+  insertChar,
+}: UseFocusLockArgs) {
+  // Hold latest values in refs so the document listeners can be attached once
+  // and never re-bound as `enabled` / `insertChar` change between keystrokes.
+  const enabledRef = useRef(enabled);
+  const insertCharRef = useRef(insertChar);
+
+  useEffect(() => {
+    enabledRef.current = enabled;
+    insertCharRef.current = insertChar;
+  }, [enabled, insertChar]);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (!enabledRef.current) return;
+      const target = e.target as Element | null;
+      // Intentional interaction with a control / dialog → leave focus alone.
+      if (target?.closest(FOCUS_EXEMPT_SELECTOR)) return;
+      inputRef.current?.focus({ preventScroll: true });
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!enabledRef.current) return;
+
+      if (e.key === "Escape") {
+        // Release focus so the user can Tab to controls (no keyboard trap).
+        inputRef.current?.blur();
+        return;
+      }
+
+      // Only recover on a single printable character with no modifier, and only
+      // when the input is not already focused (otherwise the native input
+      // handles it and `onChange` fires — we must not double-register).
+      const isPrintable =
+        e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey;
+      if (!isPrintable || e.isComposing) return;
+      if (document.activeElement === inputRef.current) return;
+
+      e.preventDefault();
+      inputRef.current?.focus({ preventScroll: true });
+      insertCharRef.current(e.key);
+    };
+
+    document.addEventListener("click", handleClick);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [inputRef]);
+}
+
 export interface UseTypingEngineArgs {
   difficulty: Difficulty;
   onStart: () => void;
@@ -155,16 +247,16 @@ export function useTypingEngine({ difficulty, onStart }: UseTypingEngineArgs) {
     setIsStarted(false);
     setIsComplete(false);
 
-    inputRef.current?.focus();
+    inputRef.current?.focus({ preventScroll: true });
   }, [difficulty, getRandomText]);
 
   useEffect(() => {
     initializeTest();
   }, [initializeTest]);
 
-  const handleInput = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value.slice(0, text.length);
+  const applyValue = useCallback(
+    (raw: string) => {
+      const value = raw.slice(0, text.length);
 
       if (!isStarted && value.length > 0) {
         setIsStarted(true);
@@ -233,9 +325,32 @@ export function useTypingEngine({ difficulty, onStart }: UseTypingEngineArgs) {
     ],
   );
 
+  const handleInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      applyValue(e.target.value);
+    },
+    [applyValue],
+  );
+
+  // Append a single character through the same pipeline as native input.
+  // Used by the focus lock to register a keystroke that arrived while the
+  // hidden input was not focused, so the keypress is not lost.
+  const insertChar = useCallback(
+    (char: string) => {
+      applyValue(typedText + char);
+    },
+    [applyValue, typedText],
+  );
+
   const handleContainerClick = useCallback(() => {
-    inputRef.current?.focus();
+    inputRef.current?.focus({ preventScroll: true });
   }, []);
+
+  useFocusLock({
+    inputRef,
+    enabled: Boolean(text) && !isComplete,
+    insertChar,
+  });
 
   const getCharacterState = useCallback(
     (index: number): DerivedCharacterState => {
