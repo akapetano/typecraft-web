@@ -5,6 +5,7 @@ import { Controls } from "@/components/features/TypingTest/components/Controls";
 import { DifficultySelector } from "@/components/features/TypingTest/components/DifficultySelector";
 import { Header } from "@/components/features/TypingTest/components/Header";
 import { HiddenInput } from "@/components/features/TypingTest/components/HiddenInput";
+import { PausedOverlay } from "@/components/features/TypingTest/components/PausedOverlay";
 import { Root } from "@/components/features/TypingTest/components/Root";
 import { StatsBar } from "@/components/features/TypingTest/components/StatsBar";
 import { TypingArea } from "@/components/features/TypingTest/components/TypingArea";
@@ -17,6 +18,7 @@ export function TypingTest() {
     text,
     typedText,
     isComplete,
+    isPaused,
     inputRef,
     wpm,
     accuracy,
@@ -27,6 +29,7 @@ export function TypingTest() {
     handleDifficultyChange,
     initializeTest,
     getCharacterState,
+    resume,
   } = useTypingTest();
 
   if (isComplete) {
@@ -55,6 +58,7 @@ export function TypingTest() {
       >
         <TypingText text={text} getCharacterState={getCharacterState} />
         <HiddenInput ref={inputRef} value={typedText} onChange={handleInput} />
+        {isPaused && <PausedOverlay onResume={resume} />}
       </TypingArea>
       <StatsBar wpm={wpm} accuracy={accuracy} timeElapsed={timeElapsed} />
       <Controls initializeTest={initializeTest} />
