@@ -1,8 +1,10 @@
 import { act, renderHook } from "@testing-library/react";
 import type React from "react";
+import { createElement, StrictMode } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   useFocusLock,
+  usePauseOnFocusLoss,
   useTypingTest,
 } from "@/components/features/TypingTest/TypingTest.hooks";
 
@@ -262,6 +264,233 @@ describe("useTypingTest - Lifecycle", () => {
 
     expect(result.current.typedText).toBe("");
     expect(result.current.isComplete).toBe(false);
+  });
+});
+
+describe("useTypingTest - Pause on focus loss", () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.restoreAllMocks();
+  });
+
+  function startTyping(result: { current: ReturnType<typeof useTypingTest> }) {
+    act(() => {
+      result.current.handleInput(makeChangeEvent(result.current.text[0] ?? ""));
+    });
+  }
+
+  it("auto-pauses and freezes the timer when the window loses focus", () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(0);
+
+    const { result } = renderHook(() => useTypingTest());
+    startTyping(result);
+
+    act(() => {
+      vi.advanceTimersByTime(5000);
+    });
+    expect(result.current.timeElapsed).toBe(5);
+    expect(result.current.isPaused).toBe(false);
+
+    act(() => {
+      window.dispatchEvent(new Event("blur"));
+    });
+    expect(result.current.isPaused).toBe(true);
+
+    // Time spent away must not count toward the elapsed time.
+    act(() => {
+      vi.advanceTimersByTime(10_000);
+    });
+    expect(result.current.timeElapsed).toBe(5);
+  });
+
+  it("auto-pauses when the tab becomes hidden", () => {
+    const visibility = vi
+      .spyOn(document, "visibilityState", "get")
+      .mockReturnValue("hidden");
+
+    const { result } = renderHook(() => useTypingTest());
+    startTyping(result);
+
+    act(() => {
+      document.dispatchEvent(new Event("visibilitychange"));
+    });
+    expect(result.current.isPaused).toBe(true);
+
+    visibility.mockRestore();
+  });
+
+  it("resumes on a key press and continues counting from where it paused", () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(0);
+
+    const { result } = renderHook(() => useTypingTest());
+    startTyping(result);
+
+    act(() => {
+      vi.advanceTimersByTime(5000);
+    });
+    act(() => {
+      window.dispatchEvent(new Event("blur"));
+    });
+    act(() => {
+      vi.advanceTimersByTime(10_000); // away, should not count
+    });
+    expect(result.current.timeElapsed).toBe(5);
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "a" }));
+    });
+    expect(result.current.isPaused).toBe(false);
+
+    act(() => {
+      vi.advanceTimersByTime(3000);
+    });
+    expect(result.current.timeElapsed).toBe(8);
+  });
+
+  it("does not register the key that resumes the test as typed input", () => {
+    const { result } = renderHook(() => useTypingTest());
+    startTyping(result);
+    const cursorAtPause = result.current.typedText.length;
+
+    act(() => {
+      window.dispatchEvent(new Event("blur"));
+    });
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "z" }));
+    });
+
+    expect(result.current.isPaused).toBe(false);
+    expect(result.current.typedText.length).toBe(cursorAtPause);
+  });
+
+  it("ignores lone modifier keys so returning via Alt/Cmd-Tab doesn't auto-resume", () => {
+    const { result } = renderHook(() => useTypingTest());
+    startTyping(result);
+
+    act(() => {
+      window.dispatchEvent(new Event("blur"));
+    });
+    expect(result.current.isPaused).toBe(true);
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Meta" }));
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Alt" }));
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Control" }));
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Shift" }));
+    });
+    expect(result.current.isPaused).toBe(true);
+  });
+
+  it("does not pause before the test has started", () => {
+    const { result } = renderHook(() => useTypingTest());
+
+    act(() => {
+      window.dispatchEvent(new Event("blur"));
+    });
+    expect(result.current.isPaused).toBe(false);
+  });
+
+  it("does not inflate elapsed time across a pause/resume cycle under StrictMode", () => {
+    // Regression: StrictMode double-invokes setState updaters in dev, so banking
+    // the paused segment inside an updater double-counted it and inflated the
+    // time (halving WPM). The timer must survive the double-invoke unchanged.
+    vi.useFakeTimers();
+    vi.setSystemTime(0);
+
+    const { result } = renderHook(() => useTypingTest(), {
+      wrapper: ({ children }) => createElement(StrictMode, null, children),
+    });
+
+    startTyping(result);
+    act(() => {
+      vi.advanceTimersByTime(5000);
+    });
+    expect(result.current.timeElapsed).toBe(5);
+
+    act(() => {
+      window.dispatchEvent(new Event("blur"));
+    });
+    act(() => {
+      vi.advanceTimersByTime(10_000); // away
+    });
+
+    // Resume and confirm the clock continues from 5s, not an inflated value.
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "a" }));
+    });
+    expect(result.current.timeElapsed).toBe(5);
+
+    act(() => {
+      vi.advanceTimersByTime(3000);
+    });
+    expect(result.current.timeElapsed).toBe(8);
+  });
+});
+
+describe("usePauseOnFocusLoss", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("calls onPause on window blur when enabled", () => {
+    const onPause = vi.fn();
+    renderHook(() => usePauseOnFocusLoss({ enabled: true, onPause }));
+
+    act(() => {
+      window.dispatchEvent(new Event("blur"));
+    });
+    expect(onPause).toHaveBeenCalledTimes(1);
+  });
+
+  it("calls onPause when the document becomes hidden", () => {
+    const visibility = vi
+      .spyOn(document, "visibilityState", "get")
+      .mockReturnValue("hidden");
+    const onPause = vi.fn();
+    renderHook(() => usePauseOnFocusLoss({ enabled: true, onPause }));
+
+    act(() => {
+      document.dispatchEvent(new Event("visibilitychange"));
+    });
+    expect(onPause).toHaveBeenCalledTimes(1);
+
+    visibility.mockRestore();
+  });
+
+  it("ignores visibilitychange while the document is still visible", () => {
+    const onPause = vi.fn();
+    renderHook(() => usePauseOnFocusLoss({ enabled: true, onPause }));
+
+    act(() => {
+      document.dispatchEvent(new Event("visibilitychange"));
+    });
+    expect(onPause).not.toHaveBeenCalled();
+  });
+
+  it("does nothing while disabled", () => {
+    const onPause = vi.fn();
+    renderHook(() => usePauseOnFocusLoss({ enabled: false, onPause }));
+
+    act(() => {
+      window.dispatchEvent(new Event("blur"));
+    });
+    expect(onPause).not.toHaveBeenCalled();
+  });
+
+  it("removes listeners on unmount", () => {
+    const onPause = vi.fn();
+    const { unmount } = renderHook(() =>
+      usePauseOnFocusLoss({ enabled: true, onPause }),
+    );
+
+    unmount();
+
+    act(() => {
+      window.dispatchEvent(new Event("blur"));
+    });
+    expect(onPause).not.toHaveBeenCalled();
   });
 });
 
