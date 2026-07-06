@@ -140,58 +140,38 @@ describe("Button", () => {
     });
   });
 
-  describe("Variants", () => {
-    it("renders with solid variant (default)", () => {
-      render(<Button variant="solid">Solid</Button>);
-      const button = screen.getByRole("button");
-      expect(button).toBeInTheDocument();
+  // Smoke check that every recipe variant/size value renders without throwing.
+  // Styling correctness is owned by the Panda recipe, so a case-per-value matrix
+  // adds no signal beyond "the value is accepted".
+  describe("Variants and sizes", () => {
+    it("renders every variant without error", () => {
+      const variants = [
+        "solid",
+        "surface",
+        "subtle",
+        "outline",
+        "plain",
+      ] as const;
+
+      for (const variant of variants) {
+        const { unmount } = render(
+          <Button variant={variant}>{variant}</Button>,
+        );
+        expect(
+          screen.getByRole("button", { name: variant }),
+        ).toBeInTheDocument();
+        unmount();
+      }
     });
 
-    it("renders with surface variant", () => {
-      render(<Button variant="surface">Surface</Button>);
-      expect(screen.getByRole("button")).toBeInTheDocument();
-    });
+    it("renders every size without error", () => {
+      const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
 
-    it("renders with subtle variant", () => {
-      render(<Button variant="subtle">Subtle</Button>);
-      expect(screen.getByRole("button")).toBeInTheDocument();
-    });
-
-    it("renders with outline variant", () => {
-      render(<Button variant="outline">Outline</Button>);
-      expect(screen.getByRole("button")).toBeInTheDocument();
-    });
-
-    it("renders with plain variant", () => {
-      render(<Button variant="plain">Plain</Button>);
-      expect(screen.getByRole("button")).toBeInTheDocument();
-    });
-  });
-
-  describe("Sizes", () => {
-    it("renders with default size (md)", () => {
-      render(<Button>Medium</Button>);
-      expect(screen.getByRole("button")).toBeInTheDocument();
-    });
-
-    it("renders with xs size", () => {
-      render(<Button size="xs">Extra Small</Button>);
-      expect(screen.getByRole("button")).toBeInTheDocument();
-    });
-
-    it("renders with sm size", () => {
-      render(<Button size="sm">Small</Button>);
-      expect(screen.getByRole("button")).toBeInTheDocument();
-    });
-
-    it("renders with lg size", () => {
-      render(<Button size="lg">Large</Button>);
-      expect(screen.getByRole("button")).toBeInTheDocument();
-    });
-
-    it("renders with xl size", () => {
-      render(<Button size="xl">Extra Large</Button>);
-      expect(screen.getByRole("button")).toBeInTheDocument();
+      for (const size of sizes) {
+        const { unmount } = render(<Button size={size}>{size}</Button>);
+        expect(screen.getByRole("button", { name: size })).toBeInTheDocument();
+        unmount();
+      }
     });
   });
 
