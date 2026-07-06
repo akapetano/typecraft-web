@@ -9,40 +9,81 @@ import type {
   TypedCharEntry,
 } from "@/components/features/TypingTest/TypingTest.types";
 
+/**
+ * Wall-clock typing timer that can be paused and resumed without losing elapsed
+ * time. Elapsed time is the sum of already-banked run segments (`accumulatedMs`)
+ * plus the currently-running segment (`Date.now() - segmentStart`). Pausing
+ * banks the running segment; resuming opens a new one. This keeps a paused test
+ * (e.g. while the tab is hidden) from unfairly inflating the time behind WPM.
+ * See TYP-15.
+ */
 export function useTypingTimer() {
-  const [startTime, setStartTime] = useState<number | null>(null);
+  // Elapsed ms banked from previously-completed run segments.
+  const accumulatedMsRef = useRef(0);
+  // Timestamp when the current run segment began, or null when idle/paused.
+  const segmentStartRef = useRef<number | null>(null);
+  // Drives the ticking interval; state (not a ref) so the effect re-subscribes.
+  const [isRunning, setIsRunning] = useState(false);
   const [timeElapsed, setTimeElapsed] = useState(0);
 
-  // Start the timer exactly once when typing begins.
-  const start = useCallback(() => {
-    setStartTime((prev) => prev ?? Date.now());
-  }, []);
+  // The pause/resume state lives in refs and is only ever mutated from event
+  // handlers and the interval — never from render or a setState updater. This
+  // keeps the transitions StrictMode-safe: mutating a ref inside a setState
+  // updater would be double-applied in dev and inflate the elapsed time.
 
-  const stop = useCallback(() => {
-    setStartTime(null);
-  }, []);
+  // Open a run segment if one is not already open. Idempotent, so it serves both
+  // the initial start (first keystroke) and resuming after a pause.
+  const openSegment = () => {
+    if (segmentStartRef.current === null) {
+      segmentStartRef.current = Date.now();
+      setIsRunning(true);
+    }
+  };
 
-  // Reset timer (e.g. when re-initializing a test).
-  const reset = useCallback(() => {
-    setStartTime(null);
+  // Bank the running segment (if any) into the accumulator and stop counting.
+  const bankSegment = () => {
+    if (segmentStartRef.current !== null) {
+      accumulatedMsRef.current += Date.now() - segmentStartRef.current;
+      segmentStartRef.current = null;
+      setIsRunning(false);
+      setTimeElapsed(Math.floor(accumulatedMsRef.current / 1000));
+    }
+  };
+
+  const reset = () => {
+    accumulatedMsRef.current = 0;
+    segmentStartRef.current = null;
+    setIsRunning(false);
     setTimeElapsed(0);
-  }, []);
+  };
 
   useEffect(() => {
-    let interval: NodeJS.Timeout | undefined;
+    if (!isRunning) return;
 
-    if (startTime !== null) {
-      interval = setInterval(() => {
-        setTimeElapsed(Math.floor((Date.now() - startTime) / 1000));
-      }, 100);
-    }
-
-    return () => {
-      if (interval) clearInterval(interval);
+    const tick = () => {
+      const running =
+        segmentStartRef.current !== null
+          ? Date.now() - segmentStartRef.current
+          : 0;
+      setTimeElapsed(Math.floor((accumulatedMsRef.current + running) / 1000));
     };
-  }, [startTime]);
 
-  return { timeElapsed, start, stop, reset };
+    tick(); // reflect resume immediately, don't wait for the first tick
+    const interval = setInterval(tick, 100);
+
+    return () => clearInterval(interval);
+  }, [isRunning]);
+
+  return {
+    timeElapsed,
+    // start and resume share mechanics (open a segment); named apart for clarity.
+    start: openSegment,
+    resume: openSegment,
+    // pause and stop both bank the running segment, preserving elapsed time.
+    pause: bankSegment,
+    stop: bankSegment,
+    reset,
+  };
 }
 
 export function useTypingStats(
@@ -163,19 +204,81 @@ export function useFocusLock({
   }, [inputRef]);
 }
 
+export interface UsePauseOnFocusLossArgs {
+  /** Whether a test is in progress (started, not complete, not already paused). */
+  enabled: boolean;
+  /** Called when the tab is hidden or the window loses focus. */
+  onPause: () => void;
+}
+
+/**
+ * Auto-pauses an in-progress test when the browser tab/window loses focus so
+ * the wall-clock timer does not keep penalizing the user while they are away
+ * (TYP-15). Resuming is intentionally a user action (handled by the engine), so
+ * there is deliberately no auto-resume on window `focus` / visibility `visible`.
+ *
+ * - `visibilitychange` → hidden covers tab switches and minimizing/backgrounding
+ *   (the only reliable signal on mobile).
+ * - `blur` covers switching to another window or application while the tab stays
+ *   visible (e.g. Alt/Cmd-Tab).
+ */
+export function usePauseOnFocusLoss({
+  enabled,
+  onPause,
+}: UsePauseOnFocusLossArgs) {
+  // Hold latest values in refs so the listeners are bound once and never
+  // re-attached as `enabled` / `onPause` change between renders.
+  const enabledRef = useRef(enabled);
+  const onPauseRef = useRef(onPause);
+
+  useEffect(() => {
+    enabledRef.current = enabled;
+    onPauseRef.current = onPause;
+  }, [enabled, onPause]);
+
+  useEffect(() => {
+    const pauseIfEnabled = () => {
+      if (enabledRef.current) onPauseRef.current();
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") pauseIfEnabled();
+    };
+
+    window.addEventListener("blur", pauseIfEnabled);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener("blur", pauseIfEnabled);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+}
+
 export interface UseTypingEngineArgs {
   difficulty: Difficulty;
   onStart: () => void;
+  onPause: () => void;
+  onResume: () => void;
 }
 
-export function useTypingEngine({ difficulty, onStart }: UseTypingEngineArgs) {
+export function useTypingEngine({
+  difficulty,
+  onStart,
+  onPause,
+  onResume,
+}: UseTypingEngineArgs) {
   const [text, setText] = useState("");
   const [typedText, setTypedText] = useState("");
   const [typedEntries, setTypedEntries] = useState<TypedCharEntry[]>([]);
   const [isStarted, setIsStarted] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
+  // Mirror of `isPaused` so the pause/resume handlers stay idempotent without
+  // depending on a possibly-stale closure over state.
+  const isPausedRef = useRef(false);
 
   // Cursor is derived from typedText length (input value is the source of truth for position).
   const cursor = typedText.length;
@@ -246,6 +349,8 @@ export function useTypingEngine({ difficulty, onStart }: UseTypingEngineArgs) {
 
     setIsStarted(false);
     setIsComplete(false);
+    setIsPaused(false);
+    isPausedRef.current = false;
 
     inputRef.current?.focus({ preventScroll: true });
   }, [difficulty, getRandomText]);
@@ -346,9 +451,62 @@ export function useTypingEngine({ difficulty, onStart }: UseTypingEngineArgs) {
     inputRef.current?.focus({ preventScroll: true });
   }, []);
 
+  // Freeze the test when the tab/window loses focus; the timer is paused via
+  // `onPause` and typing is blocked (input blurred + focus lock disabled below).
+  const pause = () => {
+    if (isPausedRef.current) return;
+    isPausedRef.current = true;
+    setIsPaused(true);
+    inputRef.current?.blur();
+    onPause();
+  };
+
+  // Resuming is an explicit user action (overlay click or any key press).
+  const resume = () => {
+    if (!isPausedRef.current) return;
+    isPausedRef.current = false;
+    setIsPaused(false);
+    onResume();
+    inputRef.current?.focus({ preventScroll: true });
+  };
+
+  // Latest-ref for `resume` so the paused keydown listener reads the current
+  // handler without taking it as an effect dependency (which would re-bind the
+  // listener every render). Mirrors the ref pattern in `useFocusLock`.
+  const resumeRef = useRef(resume);
+  resumeRef.current = resume;
+
+  usePauseOnFocusLoss({
+    enabled: isStarted && !isComplete && !isPaused,
+    onPause: pause,
+  });
+
+  // While paused, any key press (other than a lone modifier, so returning via
+  // Alt/Cmd-Tab doesn't auto-resume) resumes the test. The key is swallowed so
+  // it does not also register as a typed character.
+  useEffect(() => {
+    if (!isPaused) return;
+
+    const handleResumeKey = (e: KeyboardEvent) => {
+      if (
+        e.key === "Shift" ||
+        e.key === "Control" ||
+        e.key === "Alt" ||
+        e.key === "Meta"
+      ) {
+        return;
+      }
+      e.preventDefault();
+      resumeRef.current();
+    };
+
+    document.addEventListener("keydown", handleResumeKey);
+    return () => document.removeEventListener("keydown", handleResumeKey);
+  }, [isPaused]);
+
   useFocusLock({
     inputRef,
-    enabled: Boolean(text) && !isComplete,
+    enabled: Boolean(text) && !isComplete && !isPaused,
     insertChar,
   });
 
@@ -372,6 +530,7 @@ export function useTypingEngine({ difficulty, onStart }: UseTypingEngineArgs) {
     cursor,
     isStarted,
     isComplete,
+    isPaused,
     inputRef,
 
     // Handlers
@@ -379,6 +538,7 @@ export function useTypingEngine({ difficulty, onStart }: UseTypingEngineArgs) {
     handleContainerClick,
     initializeTest,
     getCharacterState,
+    resume,
   };
 }
 
@@ -391,6 +551,12 @@ export function useTypingTest() {
     difficulty,
     onStart: () => {
       timer.start();
+    },
+    onPause: () => {
+      timer.pause();
+    },
+    onResume: () => {
+      timer.resume();
     },
   });
 
@@ -421,6 +587,7 @@ export function useTypingTest() {
     text: engine.text,
     typedText: engine.typedText,
     isComplete: engine.isComplete,
+    isPaused: engine.isPaused,
     inputRef: engine.inputRef,
 
     // Stats
@@ -435,5 +602,6 @@ export function useTypingTest() {
     handleDifficultyChange,
     initializeTest,
     getCharacterState: engine.getCharacterState,
+    resume: engine.resume,
   };
 }
