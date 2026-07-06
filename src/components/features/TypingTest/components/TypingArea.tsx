@@ -10,6 +10,7 @@ export function TypingArea({ children, ...props }: CardRootProps) {
     <Card.Root
       cursor="text"
       variant="elevated"
+      position="relative"
       borderWidth="2"
       _hover={{ borderColor: "accent.primary.solid.bg.hover" }}
       _focus={{
