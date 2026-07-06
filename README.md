@@ -346,6 +346,14 @@ The project includes `.vscode/settings.json` with:
 - Auto-format on save
 - Biome as default formatter
 
+**Claude Code:**
+
+The repo is wired for [Claude Code](https://claude.com/claude-code) via
+`CLAUDE.md` (which imports `AGENTS.md` / `.cursor/rules/` as the single source of
+truth). Project slash commands live in `.claude/commands/` — `/verify`,
+`/scaffold-feature`, `/add-recipe`, and `/a11y`. Shared config is committed;
+keep personal overrides in the gitignored `.claude/settings.local.json`.
+
 ## 🤝 Contributing
 
 1. **Create a feature branch:**

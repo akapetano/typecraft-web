@@ -7,6 +7,12 @@ High-level guide for AI agents. Detailed conventions live in **`.cursor/rules/`*
 - **Stack**: Next.js 16 (App Router), React 19, Panda CSS, Ark UI, Biome, Vitest. Path alias: `@/*` → `./src/*`.
 - **Rules**: See `.cursor/rules/project-overview.mdc` for commands, folders, and tooling.
 
+## Claude Code
+
+- Claude Code reads `CLAUDE.md` (repo root), which imports this file so the rules stay the single source of truth.
+- Project slash commands live in `.claude/commands/`: `/verify`, `/scaffold-feature`, `/add-recipe`, `/a11y`.
+- Shared config (`.claude/settings.json`, `.claude/commands/`) is committed; personal `.claude/settings.local.json` is gitignored.
+
 ## Adding a new feature
 
 1. **Types** – Add shared types in `FeatureName.types.ts` next to the feature (or in `src/types/` if global).
