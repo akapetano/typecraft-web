@@ -36,8 +36,11 @@ export const menu = defineSlotRecipe({
       textDecoration: "none",
       userSelect: "none",
       width: "100%",
+      _hover: {
+        bg: "accent.primary.subtle.bg.hover",
+      },
       _highlighted: {
-        bg: "gray.surface.bg.hover",
+        bg: "accent.primary.subtle.bg.hover",
       },
       _focusVisible: {
         focusVisibleRing: "outside",
@@ -72,7 +75,7 @@ export const menu = defineSlotRecipe({
       flex: "1",
       _checked: {
         _icon: {
-          color: "colorPalette.plain.fg",
+          color: "accent.primary.plain.fg",
         },
       },
     },
