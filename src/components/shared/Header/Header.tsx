@@ -1,5 +1,6 @@
 import { Box, Container, HStack } from "styled-system/jsx";
 import { Logo } from "@/components/core/Logo/Logo";
+import { AudioSettingsMenu } from "@/components/shared/AudioSettingsMenu/AudioSettingsMenu";
 import { ColorModeSwitcher } from "@/components/shared/ColorModeSwitcher/ColorModeSwitcher";
 import { ThemeSwitcher } from "@/components/shared/ThemeSwitcher/ThemeSwitcher";
 import type { ColorMode } from "@/types/theme/colorMode";
@@ -17,6 +18,7 @@ export const Header = ({ colorMode, theme }: HeaderProps) => {
         <HStack justifyContent="space-between" alignItems="center">
           <Logo />
           <HStack gap="2">
+            <AudioSettingsMenu />
             <ThemeSwitcher theme={theme} />
             <ColorModeSwitcher colorMode={colorMode} />
           </HStack>
