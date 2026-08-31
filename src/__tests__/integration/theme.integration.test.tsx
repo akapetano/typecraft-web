@@ -12,6 +12,17 @@ function clearThemeStorage() {
   document.cookie = `${THEME_COOKIE_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 }
 
+/**
+ * Only the non-interactive test renders `RootShell`.
+ *
+ * `RootShell` emits a real `<html><body>` shell, which Testing Library mounts
+ * inside a container `<div>`. Any pointer interaction in that nested-document
+ * tree sends Ark's Popover positioning into an unterminated ancestor walk — a
+ * synchronous loop that hangs the run outright (no test timeout can break it,
+ * since the JS thread never yields). The interactive tests therefore render
+ * `AppLayout` directly; `setTheme` writes to the real `documentElement`, so
+ * every assertion below still targets what production would set.
+ */
 describe("Theme Integration", () => {
   beforeEach(() => {
     clearThemeStorage();
@@ -37,11 +48,9 @@ describe("Theme Integration", () => {
     const user = userEvent.setup();
 
     render(
-      <RootShell colorMode="light" theme="aurora">
-        <AppLayout colorMode="light" theme="aurora">
-          <div>Test Content</div>
-        </AppLayout>
-      </RootShell>,
+      <AppLayout colorMode="light" theme="aurora">
+        <div>Test Content</div>
+      </AppLayout>,
     );
 
     const trigger = screen.getByRole("button", { name: /theme switcher/i });
@@ -68,11 +77,9 @@ describe("Theme Integration", () => {
     const user = userEvent.setup();
 
     render(
-      <RootShell colorMode="light" theme="aurora">
-        <AppLayout colorMode="light" theme="aurora">
-          <div>Test Content</div>
-        </AppLayout>
-      </RootShell>,
+      <AppLayout colorMode="light" theme="aurora">
+        <div>Test Content</div>
+      </AppLayout>,
     );
 
     const trigger = screen.getByRole("button", { name: /theme switcher/i });

@@ -4,6 +4,17 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { AppLayout } from "@/components/shared/AppLayout/AppLayout";
 import { RootShell } from "@/components/shared/RootShell/RootShell";
 
+/**
+ * Only the non-interactive test renders `RootShell`.
+ *
+ * `RootShell` emits a real `<html><body>` shell, which Testing Library mounts
+ * inside a container `<div>`. Any pointer interaction in that nested-document
+ * tree sends Ark's Popover positioning into an unterminated ancestor walk — a
+ * synchronous loop that hangs the run outright (no test timeout can break it,
+ * since the JS thread never yields). The interactive tests therefore render
+ * `AppLayout` directly and set the shell's attribute themselves, which is what
+ * the server-rendered `<html>` would have provided.
+ */
 describe("Color Mode Integration", () => {
   beforeEach(() => {
     // Clear any existing color mode settings
@@ -30,12 +41,13 @@ describe("Color Mode Integration", () => {
   it("toggles color mode across components", async () => {
     const user = userEvent.setup();
 
+    // Stand in for the server-rendered shell (see the note above the suite).
+    document.documentElement.setAttribute("data-color-mode", "light");
+
     render(
-      <RootShell colorMode="light" theme="aurora">
-        <AppLayout colorMode="light">
-          <div>Test Content</div>
-        </AppLayout>
-      </RootShell>,
+      <AppLayout colorMode="light">
+        <div>Test Content</div>
+      </AppLayout>,
     );
 
     // Initially light mode
@@ -61,11 +73,9 @@ describe("Color Mode Integration", () => {
     const user = userEvent.setup();
 
     render(
-      <RootShell colorMode="light" theme="aurora">
-        <AppLayout colorMode="light">
-          <div>Test Content</div>
-        </AppLayout>
-      </RootShell>,
+      <AppLayout colorMode="light">
+        <div>Test Content</div>
+      </AppLayout>,
     );
 
     const button = screen.getByRole("button", { name: /color mode switcher/i });
@@ -81,11 +91,9 @@ describe("Color Mode Integration", () => {
     const user = userEvent.setup();
 
     render(
-      <RootShell colorMode="light" theme="aurora">
-        <AppLayout colorMode="light">
-          <div>Test Content</div>
-        </AppLayout>
-      </RootShell>,
+      <AppLayout colorMode="light">
+        <div>Test Content</div>
+      </AppLayout>,
     );
 
     // Get all color mode buttons (header has one)
