@@ -5,9 +5,15 @@ import { cleanup } from "@testing-library/react";
 import ResizeObserver from "resize-observer-polyfill";
 import { afterAll, afterEach, beforeAll, vi } from "vitest";
 
-// Auto-cleanup after each test
+// Auto-cleanup after each test. Frames still queued after unmount are dropped
+// so nothing can fire once the test environment is gone (see the
+// requestAnimationFrame mock below).
 afterEach(() => {
   cleanup();
+  for (const timer of pendingFrames.values()) {
+    clearTimeout(timer);
+  }
+  pendingFrames.clear();
 });
 
 // ResizeObserver mock - Essential for Ark UI
@@ -33,10 +39,33 @@ Element.prototype.scrollIntoView = () => {};
 Object.defineProperty(global, "scrollY", { value: 0, writable: true });
 Object.defineProperty(global, "scrollX", { value: 0, writable: true });
 
-// requestAnimationFrame mock
+// requestAnimationFrame mock - must stay a cancellable pair with
+// cancelAnimationFrame. Ark UI (zag-js) schedules work with `raf()` and cancels
+// it on unmount; a setTimeout-backed rAF paired with jsdom's native cancel
+// leaves those callbacks pending, so they fire after the file's environment is
+// torn down and crash React with `window is not defined`.
+const pendingFrames = new Map<number, ReturnType<typeof setTimeout>>();
+let nextFrameId = 0;
+
 global.requestAnimationFrame = ((cb: FrameRequestCallback) => {
-  return setTimeout(cb, 16) as unknown as number;
+  const id = ++nextFrameId;
+  pendingFrames.set(
+    id,
+    setTimeout(() => {
+      pendingFrames.delete(id);
+      cb(performance.now());
+    }, 16),
+  );
+  return id;
 }) as unknown as typeof requestAnimationFrame;
+
+global.cancelAnimationFrame = ((id: number) => {
+  const timer = pendingFrames.get(id);
+  if (timer !== undefined) {
+    clearTimeout(timer);
+    pendingFrames.delete(id);
+  }
+}) as unknown as typeof cancelAnimationFrame;
 
 // URL object mock
 global.URL.createObjectURL = () => "https://i.pravatar.cc/300";
