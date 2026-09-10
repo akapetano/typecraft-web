@@ -1,39 +1,36 @@
-import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { renderShell } from "@/tests/renderShell";
 import { RootShell } from "./RootShell";
 
 describe("RootShell", () => {
   it("renders html element with default lang", () => {
-    const { container } = render(
+    renderShell(
       <RootShell colorMode="light" theme="aurora">
         <div>Content</div>
       </RootShell>,
     );
 
-    const html = container.closest("html");
-    expect(html).toHaveAttribute("lang", "en");
+    expect(document.documentElement).toHaveAttribute("lang", "en");
   });
 
   it("renders with custom lang prop", () => {
-    const { container } = render(
+    renderShell(
       <RootShell colorMode="light" theme="aurora" lang="es">
         <div>Content</div>
       </RootShell>,
     );
 
-    const html = container.closest("html");
-    expect(html).toHaveAttribute("lang", "es");
+    expect(document.documentElement).toHaveAttribute("lang", "es");
   });
 
   it("applies font variable classes to html", () => {
-    const { container } = render(
+    renderShell(
       <RootShell colorMode="light" theme="aurora">
         <div>Content</div>
       </RootShell>,
     );
 
-    const html = container.closest("html");
-    const className = html?.className || "";
+    const className = document.documentElement.className;
 
     // Verify both font variables are present
     expect(className).toContain("--font-family-body");

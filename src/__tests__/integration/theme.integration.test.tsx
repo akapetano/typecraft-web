@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { AppLayout } from "@/components/shared/AppLayout/AppLayout";
 import { RootShell } from "@/components/shared/RootShell/RootShell";
 import { THEME_ATTRIBUTE_NAME, THEME_COOKIE_NAME } from "@/constants/theme";
+import { renderShell } from "@/tests/renderShell";
 
 function clearThemeStorage() {
   document.documentElement.removeAttribute(THEME_ATTRIBUTE_NAME);
@@ -13,15 +14,13 @@ function clearThemeStorage() {
 }
 
 /**
- * Only the non-interactive test renders `RootShell`.
+ * Only the non-interactive test renders `RootShell`, via `renderShell` — the
+ * shell emits `<html>`/`<body>`, so it has to mount on `document` rather than
+ * Testing Library's container `<div>`.
  *
- * `RootShell` emits a real `<html><body>` shell, which Testing Library mounts
- * inside a container `<div>`. Any pointer interaction in that nested-document
- * tree sends Ark's Popover positioning into an unterminated ancestor walk — a
- * synchronous loop that hangs the run outright (no test timeout can break it,
- * since the JS thread never yields). The interactive tests therefore render
- * `AppLayout` directly; `setTheme` writes to the real `documentElement`, so
- * every assertion below still targets what production would set.
+ * The interactive tests render `AppLayout` directly. `setTheme` writes to the
+ * real `documentElement`, so every assertion below still targets what
+ * production would set.
  */
 describe("Theme Integration", () => {
   beforeEach(() => {
@@ -29,7 +28,7 @@ describe("Theme Integration", () => {
   });
 
   it("renders with provided theme", () => {
-    render(
+    renderShell(
       <RootShell colorMode="light" theme="mono">
         <AppLayout colorMode="light" theme="mono">
           <div>Test Content</div>
